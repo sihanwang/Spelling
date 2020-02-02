@@ -1,2 +1,5 @@
-n. 野餐
-vi. 去野餐
+Pronunciation:
+	UK phonetic: /ˈpɪknɪk/	US phonetic: /ˈpɪknɪk/
+Translation:
+	n. 野餐
+	vi. 去野餐

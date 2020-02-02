@@ -40,7 +40,19 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>javazoom.jl</groupId>
+			<artifactId>JLayer</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>beatunes</id>
+			<url>https://www.beatunes.com/repo/maven2/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>

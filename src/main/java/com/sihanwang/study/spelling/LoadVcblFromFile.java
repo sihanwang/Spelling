@@ -22,9 +22,6 @@ public class LoadVcblFromFile {
 
 	private static final String log4jcfg = "../cfg/log4j.properties";
 
-	private static final String line_separator = System.getProperty("line.separator");
-
-	private static final String file_separator = System.getProperty("file.separator");
 
 	private static Logger logger = LoggerFactory.getLogger(LoadVcblFromFile.class);
 
@@ -52,9 +49,9 @@ public class LoadVcblFromFile {
 		File fileWordList = new File(wordlistfilepath);
 		
 		String filename = fileWordList.getName();
-		String manifestfolder = vocabulary_path + file_separator + filename;
-		String explain_path = manifestfolder + file_separator + "explain" ;
-		String mp3_path = manifestfolder + file_separator + "mp3" ;
+		String manifestfolder = vocabulary_path + Start.file_separator + filename;
+		String explain_path = manifestfolder + Start.file_separator + "explain" ;
+		String mp3_path = manifestfolder + Start.file_separator + "mp3" ;
 		// create a folder
 		FileUtils.forceMkdir(new File(manifestfolder));
 		FileUtils.forceMkdir(new File(explain_path));
@@ -66,7 +63,7 @@ public class LoadVcblFromFile {
 		while (it.hasNext()) {
 			String word = it.next();
 			DownloadAWord(word,explain_path,mp3_path);
-			FileUtils.writeStringToFile(Manifestwordlist, word+line_separator, "UTF-8", true); 
+			FileUtils.writeStringToFile(Manifestwordlist, word+Start.line_separator, "UTF-8", true); 
 		}
 	}
 
@@ -80,18 +77,43 @@ public class LoadVcblFromFile {
 		Basic basicResponse = YDDR.getBasic();
 
 		String translation_result = "";
+		
+		String Ukphonetic=basicResponse.getUkphonetic();
+		
+		if (Ukphonetic!=null && Ukphonetic != null)
+		{
+			translation_result=translation_result+"\tUK phonetic: /"+Ukphonetic+"/";
+		}
+		
+		String Usphonetic=basicResponse.getUsphonetic();
+
+		if (Usphonetic!=null && Usphonetic != null)
+		{
+			translation_result=translation_result+"\tUS phonetic: /"+Usphonetic+"/";
+		}
+		
+		if (translation_result != null)
+		{
+			translation_result="Pronunciation:" + Start.line_separator+ translation_result + Start.line_separator;
+		}
+		
+		translation_result=translation_result+"Translation:"+Start.line_separator;
+		
+		
 		for (String i : basicResponse.explains) {
-			translation_result = translation_result + i + System.getProperty("line.separator");
+			translation_result = translation_result + "\t"+i + Start.line_separator;
 		}
 
-		FileUtils.writeStringToFile(new File(explain_path + file_separator + word + ".txt"), translation_result,
+		FileUtils.writeStringToFile(new File(explain_path + Start.file_separator + word + ".txt"), translation_result,
 				"UTF-8", false);
 
 		// download voice by speakUrl and write a mp3 file named with work
 		String MP3_Url = YDDR.getSpeakUrl();
 
-		FileUtils.writeByteArrayToFile(new File(mp3_path + file_separator + word + ".mp3"), fv3U.requestForMp3(MP3_Url),
+		FileUtils.writeByteArrayToFile(new File(mp3_path + Start.file_separator + word + ".mp3"), fv3U.requestForMp3(MP3_Url),
 				false);
 	}
+	
+	
 
 }
