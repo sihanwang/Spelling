@@ -1,7 +1,8 @@
-Pronunciation:
-	UK phonetic: /wɪn/	US phonetic: /wɪn/
-Translation:
-	vt. 赢得；在…中获胜
-	vi. 赢；获胜；成功
-	n. 赢；胜利
-	n. (Win)人名；(德、荷、缅)温；(英)温(女子教名Winifred的昵称)
+#Pronunciation#
+UK phonetic: /wɪn/	US phonetic: /wɪn/
+
+#Translation#
+vt. 赢得；在…中获胜
+vi. 赢；获胜；成功
+n. 赢；胜利
+n. (Win)人名；(德、荷、缅)温；(英)温(女子教名Winifred的昵称)

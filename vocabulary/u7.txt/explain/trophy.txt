@@ -1,7 +1,8 @@
-Pronunciation:
-	UK phonetic: /ˈtrəʊfi/	US phonetic: /ˈtroʊfi/
-Translation:
-	n. 奖品；战利品；纪念品
-	vt. 用战利品装饰
-	adj. 显示身份的；有威望的
-	n. (Trophy)人名；(法)特罗菲
+#Pronunciation#
+UK phonetic: /ˈtrəʊfi/	US phonetic: /ˈtroʊfi/
+
+#Translation#
+n. 奖品；战利品；纪念品
+vt. 用战利品装饰
+adj. 显示身份的；有威望的
+n. (Trophy)人名；(法)特罗菲

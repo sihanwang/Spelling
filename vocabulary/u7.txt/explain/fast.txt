@@ -1,8 +1,9 @@
-Pronunciation:
-	UK phonetic: /fɑːst/	US phonetic: /fæst/
-Translation:
-	adj. 快速的，迅速的；紧的，稳固的
-	adv. 迅速地；紧紧地；彻底地
-	vi. 禁食，斋戒
-	n. 斋戒；绝食
-	n. (Fast)人名；(德、英、俄、芬、捷、瑞典)法斯特
+#Pronunciation#
+UK phonetic: /fɑːst/	US phonetic: /fæst/
+
+#Translation#
+adj. 快速的，迅速的；紧的，稳固的
+adv. 迅速地；紧紧地；彻底地
+vi. 禁食，斋戒
+n. 斋戒；绝食
+n. (Fast)人名；(德、英、俄、芬、捷、瑞典)法斯特

@@ -1,4 +1,5 @@
-Pronunciation:
-	UK phonetic: /ˌkɒmpəˈtɪʃn/	US phonetic: /ˌkɑːmpəˈtɪʃn/
-Translation:
-	n. 竞争；比赛，竞赛
+#Pronunciation#
+UK phonetic: /ˌkɒmpəˈtɪʃn/	US phonetic: /ˌkɑːmpəˈtɪʃn/
+
+#Translation#
+n. 竞争；比赛，竞赛

@@ -57,6 +57,8 @@ public class LoadVcblFromFile {
 		FileUtils.forceMkdir(new File(explain_path));
 		FileUtils.forceMkdir(new File(mp3_path));
 		File Manifestwordlist= new File(manifestfolder,filename);
+		
+		FileUtils.writeStringToFile(Manifestwordlist,"",false); //clear contents
 		List<String> Wordlist = FileUtils.readLines(new File(wordlistfilepath), "UTF-8");
 		// write word list to a manifest file
 		Iterator<String> it = Wordlist.iterator();
@@ -82,26 +84,29 @@ public class LoadVcblFromFile {
 		
 		if (Ukphonetic!=null && Ukphonetic != null)
 		{
-			translation_result=translation_result+"\tUK phonetic: /"+Ukphonetic+"/";
+			translation_result=translation_result+"UK phonetic: /"+Ukphonetic+"/\t";
 		}
 		
 		String Usphonetic=basicResponse.getUsphonetic();
 
 		if (Usphonetic!=null && Usphonetic != null)
 		{
-			translation_result=translation_result+"\tUS phonetic: /"+Usphonetic+"/";
+			translation_result=translation_result+"US phonetic: /"+Usphonetic+"/";
 		}
 		
 		if (translation_result != null)
 		{
-			translation_result="Pronunciation:" + Start.line_separator+ translation_result + Start.line_separator;
+			translation_result=
+					"#Pronunciation#" + Start.line_separator
+					+ translation_result + Start.line_separator+ Start.line_separator;
 		}
 		
-		translation_result=translation_result+"Translation:"+Start.line_separator;
+		translation_result=translation_result
+				+"#Translation#"+Start.line_separator;
 		
 		
 		for (String i : basicResponse.explains) {
-			translation_result = translation_result + "\t"+i + Start.line_separator;
+			translation_result = translation_result+i + Start.line_separator;
 		}
 
 		FileUtils.writeStringToFile(new File(explain_path + Start.file_separator + word + ".txt"), translation_result,

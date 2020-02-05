@@ -1,4 +1,5 @@
-Pronunciation:
-	UK phonetic: //
-Translation:
-	放弃；交出
+#Pronunciation#
+UK phonetic: //	
+
+#Translation#
+放弃；交出

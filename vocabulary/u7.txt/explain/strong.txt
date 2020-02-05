@@ -1,6 +1,7 @@
-Pronunciation:
-	UK phonetic: /strɒŋ/	US phonetic: /strɔːŋ/
-Translation:
-	adj. 坚强的；强壮的；牢固的；擅长的
-	adv. 强劲地；猛烈地
-	n. (Strong)人名；(英)斯特朗
+#Pronunciation#
+UK phonetic: /strɒŋ/	US phonetic: /strɔːŋ/
+
+#Translation#
+adj. 坚强的；强壮的；牢固的；擅长的
+adv. 强劲地；猛烈地
+n. (Strong)人名；(英)斯特朗
