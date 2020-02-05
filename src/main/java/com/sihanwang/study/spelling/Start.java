@@ -1,11 +1,12 @@
 package com.sihanwang.study.spelling;
 
 import java.awt.EventQueue;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
@@ -43,6 +44,8 @@ public class Start {
 	public static boolean review_spelling = true;
 
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
+	
+	public static ArrayBlockingQueue<String> LetterVoiceQueue = new ArrayBlockingQueue<String>(30);
 
 	static {
 		Properties prop = new Properties();
@@ -89,6 +92,31 @@ public class Start {
 		} catch (Exception e) {
 			logger.error("Can't load Spelling configuration file!", e);
 		}
+		
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				while(true)
+				{
+					try {
+						String Letter=LetterVoiceQueue.take();
+						if(Letter.length()==1)
+						{
+							PlayLetter(Letter);
+						}
+						else
+						{
+							PlayMp3(Letter);
+						}
+						
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						logger.error("InterruptedException", e);
+					}
+				}
+			}}).start();
 	}
 
 	public static void main(String[] args) {
@@ -120,32 +148,45 @@ public class Start {
 		return Result;
 	}
 
-	public static void PlaySpelling(String word) {
-
-		try {
-
-			if (review_spelling) {
-				for (int i = 0; i < word.length(); i++) {
-					String subStr = word.substring(i, i + 1).toLowerCase();
-					ByteArrayInputStream BAIS = new ByteArrayInputStream(Spelling_Voice.get(subStr));
-					Player player = new Player(BAIS);
-					player.play();
-					try {
-						BAIS.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						logger.error("Can't close inputstream", e);
-					}
-					player.close();
-				}
-			}
-			PlayMp3(word);
-
-		} catch (JavaLayerException e) {
-			// TODO Auto-generated catch block
-			logger.error("Cannot play Mp3", e);
+	public static void PlayLetter(String letter)
+	{
+		byte[] voice=Spelling_Voice.get(letter);
+		if (voice==null)
+		{
+			return;
 		}
+		
+		ByteArrayInputStream BAIS = new ByteArrayInputStream(voice);
+		Player player=null;
+		try {
+			player = new Player(BAIS);
+			player.play();
+			player.close();
+		} catch (JavaLayerException e1) {
+			// TODO Auto-generated catch block
+			logger.error("Cannot play Mp3", e1);
+		}
+		try {
+			BAIS.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Can't close inputstream", e);
+		}
+		
+	}
 
+	public static void PlaySpelling(String word) {
+		word=word.toLowerCase();
+		try {
+			for (int i = 0; i < word.length(); i++) {
+				String subStr = word.substring(i, i + 1);
+				Start.LetterVoiceQueue.put(subStr);
+			}
+			Start.LetterVoiceQueue.put(word);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			logger.error("InterruptedException", e1);
+		}
 	}
 
 	public static void PlayMp3(String word) {

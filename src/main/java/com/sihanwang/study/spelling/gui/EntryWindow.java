@@ -31,6 +31,8 @@ public class EntryWindow extends JFrame {
 	private JButton btnLoad = new JButton("Load");
 	private JButton btnReview = new JButton("Review");
 	private JButton btnTest = new JButton("Test");
+	private ReviewWindow RW=null;
+	private SpellingTestWindow STW=null;
 
 	/**
 	 * Launch the application.
@@ -55,7 +57,7 @@ public class EntryWindow extends JFrame {
 	private void initUI() {
 		setTitle("Spelling");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1024, 768);
+		
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,18 +82,32 @@ public class EntryWindow extends JFrame {
 			}
 
 			if (Start.wordlist != null && Start.wordlist.size() > 0) {
+				btnReview.setText("Review "+ Start.wordlist_name);
 				btnReview.setEnabled(true);
+				btnTest.setText("Test "+Start.wordlist_name);
 				btnTest.setEnabled(true);
 			}
 		});
 
 		btnReview.setToolTipText("Review word list loaded in first step");
 		btnReview.addActionListener((event) -> {
-			ReviewWindow RW = new ReviewWindow();
+			if (STW!=null)
+			{
+				STW.setVisible(false);
+			}
+			
+			RW = new ReviewWindow();
 			RW.setVisible(true);
 		});
 
 		btnTest.addActionListener((event) -> {
+			if (RW!=null)
+			{
+				RW.setVisible(false);
+			}
+			
+			STW = new SpellingTestWindow();
+			STW.setVisible(true);
 		});
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -115,6 +131,8 @@ public class EntryWindow extends JFrame {
 		gl_contentPane.setVerticalGroup(ssg);
 
 		pack();
+		
+		setSize(1024, 768);
 
 		if (Start.wordlist == null) {
 			btnReview.setEnabled(false);

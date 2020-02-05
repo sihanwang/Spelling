@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.JTextArea;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -34,6 +37,8 @@ public class ReviewWindow extends JFrame {
 	private JButton btnPrevious = new JButton("Previous");
 	private JButton btnNext = new JButton("Next");
 	private JLabel Statusbar = new JLabel();
+	
+	private  Logger logger = LoggerFactory.getLogger(ReviewWindow.class);
 	/**
 	 * Create the frame.
 	 */
@@ -44,8 +49,8 @@ public class ReviewWindow extends JFrame {
 	private void initUI()
 	{
 		setTitle("Review");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,8 +60,9 @@ public class ReviewWindow extends JFrame {
 		Meaning.setBackground(SystemColor.window);
 		Meaning.setFont(new Font("Arial Unicode MS", Font.PLAIN, 22));
 		Meaning.setLineWrap(true);
+		Meaning.setEditable(false);
 		Statusbar.setFont(new Font("Arial Unicode MS", Font.PLAIN, 12));
-		Statusbar.setText("Jing Wang is the best man");
+
 		
 		////////////////////////////
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -99,6 +105,8 @@ public class ReviewWindow extends JFrame {
 		gl_contentPane.setVerticalGroup(vGroup);
 		
 		pack();
+		
+		setSize(1024,768);
 		
 		////////////////////////////
 		btnPrevious.addActionListener(new ActionListener() {
@@ -150,13 +158,13 @@ public class ReviewWindow extends JFrame {
 			btnNext.setEnabled(true);
 		}
 		
-		new Timer().schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				Start.PlaySpelling(word);
-			}}, 100);	
+		try {
+			Start.LetterVoiceQueue.put(word.toLowerCase());
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			logger.error("InterruptedException", e1);
+		}
+		
 		
 		
 	}
