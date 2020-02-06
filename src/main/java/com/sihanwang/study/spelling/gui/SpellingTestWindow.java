@@ -197,31 +197,30 @@ public class SpellingTestWindow extends JFrame {
 					}
 					else
 					{
-						Integer times=errorlist.get(word);
-						if (times!=null)
-						{
-							times=times+1;
+						Integer times = errorlist.get(word);
+						if (times != null) {
+							times = times + 1;
+						} else {
+							times = 1;
 						}
-						else
-						{
-							times=1;
-						}
-						
+
 						errorlist.put(word, times);
-						
-						//wrong
-						//put wrong word to the end of queue
-						if (WordQueue.get(WordQueue.size()-1)!=word) //dedup
+
+						// wrong
+						// put wrong word to the end of queue
+						if (WordQueue.get(WordQueue.size() - 1) != word) // dedup
 						{
 							WordQueue.add(word);
 						}
-						
-						Statusbar.setText("Progress:"+String.valueOf(wordindex+1)+"/"+WordQueue.size()+"          Try times:"+times);
-						
+
+						Statusbar.setText("Progress:" + String.valueOf(wordindex + 1) + "/" + WordQueue.size()
+								+ "          Try times:" + times);
+
 						Start.LetterVoiceQueue.clear();
 						InputField.setEditable(false);
 						InputField.setForeground(Color.red);
 						InputField.setText(word);
+
 						new Timer().schedule(new TimerTask() {
 
 							@Override
@@ -230,8 +229,10 @@ public class SpellingTestWindow extends JFrame {
 								InputField.setEditable(true);
 								InputField.setForeground(Color.black);
 								InputField.setText("");
-							}}, 2000);
-						
+							}
+						}, 2000);
+
+						Start.PlayEffect("bit");
 					}
 					
 					return;

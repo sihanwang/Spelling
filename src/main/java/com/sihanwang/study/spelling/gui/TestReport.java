@@ -42,6 +42,22 @@ public class TestReport extends JFrame  {
 	
 	public void initUI()
 	{
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (score==100)
+				{
+					Start.PlayEffect("ok");
+				}
+				else if (score <80)
+				{
+					Start.PlayEffect("cry");
+				}				
+			}}).start();
+
+		
 		setTitle("Test Report");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		contentPane = new JPanel();

@@ -44,6 +44,8 @@ public class Start {
 	public static boolean review_spelling = true;
 
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
+	private static HashMap<String, byte[]> SoundEffect = new HashMap<String, byte[]>();
+	
 	
 	public static ArrayBlockingQueue<String> LetterVoiceQueue = new ArrayBlockingQueue<String>(30);
 	
@@ -90,7 +92,11 @@ public class Start {
 			Spelling_Voice.put("x", FileUtils.readFileToByteArray(new File(voice_path, "x.mp3")));
 			Spelling_Voice.put("y", FileUtils.readFileToByteArray(new File(voice_path, "y.mp3")));
 			Spelling_Voice.put("z", FileUtils.readFileToByteArray(new File(voice_path, "z.mp3")));
-
+			
+			SoundEffect.put("bit", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "bit.mp3")));
+			SoundEffect.put("ok", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "ok.mp3")));
+			SoundEffect.put("cry", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "cry.mp3")));
+			
 		} catch (Exception e) {
 			logger.error("Can't load Spelling configuration file!", e);
 		}
@@ -188,6 +194,31 @@ public class Start {
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			logger.error("InterruptedException", e1);
+		}
+	}
+	
+	public static void PlayEffect(String effectname) {
+		byte[] voice=SoundEffect.get(effectname);
+		if (voice==null)
+		{
+			return;
+		}
+		
+		ByteArrayInputStream BAIS = new ByteArrayInputStream(voice);
+		Player player=null;
+		try {
+			player = new Player(BAIS);
+			player.play();
+			player.close();
+		} catch (JavaLayerException e1) {
+			// TODO Auto-generated catch block
+			logger.error("Cannot play Mp3", e1);
+		}
+		try {
+			BAIS.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("Can't close inputstream", e);
 		}
 	}
 
