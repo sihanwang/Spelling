@@ -1,2 +1,0 @@
-adventure:2
-Score:50

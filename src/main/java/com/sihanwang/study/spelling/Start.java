@@ -41,8 +41,6 @@ public class Start {
 
 	public static String wordlist_name = null;
 
-	public static boolean review_spelling = true;
-
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
 	private static HashMap<String, byte[]> SoundEffect = new HashMap<String, byte[]>();
 	
@@ -59,11 +57,7 @@ public class Start {
 			FileInputStream fis = new FileInputStream(spelling_cfg);
 			prop.load(fis);
 			vocabulary_path = prop.getProperty("vocabulary_folder");
-			if (prop.getProperty("review_spelling").equals("true")) {
-				review_spelling = true;
-			} else {
-				review_spelling = false;
-			}
+			
 			String voice_path = prop.getProperty("voice_folder");
 
 			Spelling_Voice.put("a", FileUtils.readFileToByteArray(new File(voice_path, "a.mp3")));

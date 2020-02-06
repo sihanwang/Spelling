@@ -41,7 +41,7 @@ public class LoadVcblFromFile {
 	}
 
 	public static void main(String[] args) throws Exception {
-		DownloadWordList("/Users/jing.wang/Desktop/word/copy.txt");
+		DownloadWordList("/Users/jing.wang/Desktop/word/u12.txt");
 	}
 
 	public static void DownloadWordList(String wordlistfilepath) throws Exception
