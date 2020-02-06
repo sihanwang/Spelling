@@ -46,6 +46,8 @@ public class Start {
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
 	
 	public static ArrayBlockingQueue<String> LetterVoiceQueue = new ArrayBlockingQueue<String>(30);
+	
+	private static EntryWindow EW;
 
 	static {
 		Properties prop = new Properties();
@@ -124,8 +126,8 @@ public class Start {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EntryWindow frame = new EntryWindow();
-					frame.setVisible(true);
+					EW = new EntryWindow();
+					EW.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

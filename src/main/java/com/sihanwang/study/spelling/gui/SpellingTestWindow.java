@@ -8,9 +8,17 @@ import java.awt.SystemColor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +48,7 @@ public class SpellingTestWindow extends JFrame {
 	private JLabel Statusbar = new JLabel();
 	private Logger logger = LoggerFactory.getLogger(SpellingTestWindow.class);
 	
-	private HashMap<String,Integer> result=new HashMap<String,Integer>();
+	private HashMap<String,Integer> errorlist=new HashMap<String,Integer>();
 	
 	private ArrayList<String> WordQueue=new ArrayList<String>();
 	
@@ -117,6 +126,8 @@ public class SpellingTestWindow extends JFrame {
 				int code=e.getKeyCode();
 				if (code==10)
 				{
+					
+					
 					if (word.toLowerCase().trim().equals(InputField.getText().trim().toLowerCase()))
 					{
 						//Currect
@@ -127,16 +138,6 @@ public class SpellingTestWindow extends JFrame {
 							logger.error("InterruptedException", e1);
 						}
 						
-						Integer times=result.get(word);
-						if (times==null)
-						{
-							result.put(word, 1);
-						}
-						else
-						{
-							result.put(word, times+1);
-						}
-						
 						
 						wordindex=wordindex+1;
 						if (wordindex<WordQueue.size())
@@ -145,17 +146,77 @@ public class SpellingTestWindow extends JFrame {
 						}
 						else
 						{
+							
 							//complete
-							System.out.println("Complete");
+							InputField.setEnabled(false);
+							//reverse order by try times
+							List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(errorlist.entrySet());
+							
+							Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+						           @Override
+						           public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+						               return o2.getValue().compareTo(o1.getValue())*-1;
+						           }
+						       });
+
+							String manifestfolder = Start.vocabulary_path + Start.file_separator + Start.wordlist_name;
+
+							Date dNow = new Date( );
+						    SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
+							
+						    File TestReport= new File(manifestfolder,Start.wordlist_name+"_"+ft.format(dNow)+".report");
+						    
+							
+							try {
+								
+								FileUtils.writeStringToFile(TestReport,"",false); //clear contentss
+								TestReport tr = new TestReport();
+								int TotalTimes = 0;
+								
+								for (Map.Entry<String, Integer> me : list)
+								{
+									tr.ErrorReport.put(me.getKey(),me.getValue());
+									TotalTimes=TotalTimes+me.getValue();
+									FileUtils.writeStringToFile(TestReport, me.getKey()+":"+me.getValue()+Start.line_separator, "UTF-8", true); 
+								}
+								
+								tr.score=(int)((((float)Start.wordlist.size())/(TotalTimes+Start.wordlist.size())*100));
+								FileUtils.writeStringToFile(TestReport, "Score:"+tr.score, "UTF-8", true); 
+								
+								Start.LetterVoiceQueue.clear();
+								dispose();
+								tr.initUI();
+								tr.setVisible(true);
+								
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
 						}
 					}
 					else
 					{
+						Integer times=errorlist.get(word);
+						if (times!=null)
+						{
+							times=times+1;
+						}
+						else
+						{
+							times=1;
+						}
+						
+						errorlist.put(word, times);
+						
 						//wrong
+						//put wrong word to the end of queue
 						if (WordQueue.get(WordQueue.size()-1)!=word) //dedup
 						{
 							WordQueue.add(word);
 						}
+						
+						Statusbar.setText("Progress:"+String.valueOf(wordindex+1)+"/"+WordQueue.size()+"          Try times:"+times);
 						
 						Start.LetterVoiceQueue.clear();
 						InputField.setEditable(false);
@@ -213,7 +274,14 @@ public class SpellingTestWindow extends JFrame {
 		InputField.setText("");
 		
 		Meaning.setText( Start.ReadExplain(word));
-		Statusbar.setText("Progress:\t"+String.valueOf(wordindex+1)+"/"+WordQueue.size());
+		
+		Integer times=errorlist.get(word);
+		if (times==null)
+		{
+			times=0;
+		}
+		
+		Statusbar.setText("Progress:"+String.valueOf(wordindex+1)+"/"+WordQueue.size()+"          Try times:"+times);
 		
 
 		try {

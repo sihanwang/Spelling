@@ -1,0 +1,3 @@
+adventure:1
+summer:1
+Score:50
