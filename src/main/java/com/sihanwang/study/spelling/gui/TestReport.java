@@ -47,9 +47,17 @@ public class TestReport extends JFrame  {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if (score==100)
+				if (score>=95)
 				{
 					Start.PlayEffect("ok");
+				}
+				else if (score<95 && score >=90)
+				{
+					Start.PlayEffect("lok");
+				}
+				else if (score<90 && score >=80)
+				{
+					Start.PlayEffect("soso");
 				}
 				else if (score <80)
 				{

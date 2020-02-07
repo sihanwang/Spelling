@@ -1,7 +1,0 @@
-#Pronunciation#
-UK phonetic: /sneɪk/	US phonetic: /sneɪk/
-
-#Translation#
-n. 蛇；阴险的人
-vi. 迂回前进
-vt. 拉（木材等）；迂回前进

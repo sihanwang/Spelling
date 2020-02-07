@@ -1,7 +1,0 @@
-#Pronunciation#
-UK phonetic: /stɒp/	US phonetic: /stɑːp/
-
-#Translation#
-vt. 停止；堵塞；断绝
-vi. 停止；中止；逗留；被塞住
-n. 停止；车站；障碍；逗留

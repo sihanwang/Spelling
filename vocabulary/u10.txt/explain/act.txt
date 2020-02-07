@@ -1,7 +1,0 @@
-#Pronunciation#
-UK phonetic: /ækt/	US phonetic: /ækt/
-
-#Translation#
-v. 行动；表现；起作用；扮演（角色）；担任；假装；代理
-n. 行为；假装；某种行为（或常规等）；法令；判决书；会议记录；（戏剧等的）幕；表演；演出团体
-abbr. 活跃的 (active)；演员 (actor)；实际的 (actual)

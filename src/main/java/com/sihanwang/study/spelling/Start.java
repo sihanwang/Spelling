@@ -90,6 +90,8 @@ public class Start {
 			SoundEffect.put("bit", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "bit.mp3")));
 			SoundEffect.put("ok", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "ok.mp3")));
 			SoundEffect.put("cry", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "cry.mp3")));
+			SoundEffect.put("lok", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "lok.mp3")));
+			SoundEffect.put("soso", FileUtils.readFileToByteArray(new File(voice_path+"/effect", "soso.mp3")));
 			
 		} catch (Exception e) {
 			logger.error("Can't load Spelling configuration file!", e);

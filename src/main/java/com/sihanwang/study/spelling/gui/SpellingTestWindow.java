@@ -8,6 +8,8 @@ import java.awt.SystemColor;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -107,6 +109,47 @@ public class SpellingTestWindow extends JFrame {
 		
 		
 		////////////////////////////
+		InputField.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					Start.LetterVoiceQueue.clear();
+					Start.LetterVoiceQueue.put(word.toLowerCase());
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					logger.error("InterruptedException", e1);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}});
+		
+		
+		
+		
 		InputField.addKeyListener(new KeyListener() {
 
 			@Override
@@ -164,8 +207,8 @@ public class SpellingTestWindow extends JFrame {
 							Date dNow = new Date( );
 						    SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
 							
-						    File TestReport= new File(manifestfolder,Start.wordlist_name+"_"+ft.format(dNow)+".report");
-						    
+						    File TestReport= new File(manifestfolder,Start.wordlist_name+"."+ft.format(dNow)+".report");
+						    File TestReview= new File(manifestfolder,Start.wordlist_name+"."+ft.format(dNow)+".review");
 							
 							try {
 								
@@ -178,6 +221,7 @@ public class SpellingTestWindow extends JFrame {
 									tr.ErrorReport.put(me.getKey(),me.getValue());
 									TotalTimes=TotalTimes+me.getValue();
 									FileUtils.writeStringToFile(TestReport, me.getKey()+":"+me.getValue()+Start.line_separator, "UTF-8", true); 
+									FileUtils.writeStringToFile(TestReview, me.getKey()+Start.line_separator, "UTF-8", true); 
 								}
 								
 								tr.score=(int)((((float)Start.wordlist.size())/(TotalTimes+Start.wordlist.size())*100));
@@ -197,6 +241,11 @@ public class SpellingTestWindow extends JFrame {
 					}
 					else
 					{
+						if (InputField.getText().trim().equals(""))
+						{
+							return;
+						}
+						
 						Integer times = errorlist.get(word);
 						if (times != null) {
 							times = times + 1;

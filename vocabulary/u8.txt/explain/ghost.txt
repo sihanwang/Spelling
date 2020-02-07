@@ -1,7 +1,0 @@
-#Pronunciation#
-UK phonetic: /ɡəʊst/	US phonetic: /ɡoʊst/
-
-#Translation#
-n. 鬼，幽灵
-vt. 作祟于；替…捉刀；为人代笔
-vi. 替人代笔

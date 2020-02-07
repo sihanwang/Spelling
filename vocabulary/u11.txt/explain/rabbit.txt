@@ -1,7 +1,0 @@
-#Pronunciation#
-UK phonetic: /ˈræbɪt/	US phonetic: /ˈræbɪt/
-
-#Translation#
-n. 兔子，野兔
-vt. 让…见鬼去吧
-vi. 猎兔

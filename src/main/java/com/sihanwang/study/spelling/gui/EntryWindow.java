@@ -74,7 +74,7 @@ public class EntryWindow extends JFrame {
 
 			try {
 				File wordlist = new File(file.getAbsoluteFile().toString());
-				Start.wordlist_name = wordlist.getName();
+				Start.wordlist_name = wordlist.getName().substring(0,  wordlist.getName().indexOf("."));
 				Start.wordlist = FileUtils.readLines(wordlist, "UTF-8");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block

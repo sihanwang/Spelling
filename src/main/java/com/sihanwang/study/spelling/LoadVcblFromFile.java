@@ -41,14 +41,14 @@ public class LoadVcblFromFile {
 	}
 
 	public static void main(String[] args) throws Exception {
-		DownloadWordList("/Users/jing.wang/Desktop/word/u12.txt");
+		DownloadWordList("/Users/jing.wang/Desktop/word/u7.txt");
 	}
 
 	public static void DownloadWordList(String wordlistfilepath) throws Exception
 	{
 		File fileWordList = new File(wordlistfilepath);
 		
-		String filename = fileWordList.getName();
+		String filename = fileWordList.getName().substring(0, fileWordList.getName().indexOf("."));
 		String manifestfolder = vocabulary_path + Start.file_separator + filename;
 		String explain_path = manifestfolder + Start.file_separator + "explain" ;
 		String mp3_path = manifestfolder + Start.file_separator + "mp3" ;
@@ -56,7 +56,7 @@ public class LoadVcblFromFile {
 		FileUtils.forceMkdir(new File(manifestfolder));
 		FileUtils.forceMkdir(new File(explain_path));
 		FileUtils.forceMkdir(new File(mp3_path));
-		File Manifestwordlist= new File(manifestfolder,filename);
+		File Manifestwordlist= new File(manifestfolder,fileWordList.getName());
 		
 		FileUtils.writeStringToFile(Manifestwordlist,"",false); //clear contents
 		List<String> Wordlist = FileUtils.readLines(new File(wordlistfilepath), "UTF-8");
