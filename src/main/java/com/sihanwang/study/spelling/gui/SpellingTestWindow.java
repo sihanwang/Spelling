@@ -279,7 +279,7 @@ public class SpellingTestWindow extends JFrame {
 								InputField.setForeground(Color.black);
 								InputField.setText("");
 							}
-						}, 2000);
+						}, 3000);
 
 						Start.PlayEffect("bit");
 					}
