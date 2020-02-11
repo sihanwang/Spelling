@@ -22,7 +22,6 @@ public class LoadVcblFromFile {
 
 	private static final String log4jcfg = "../cfg/log4j.properties";
 
-
 	private static Logger logger = LoggerFactory.getLogger(LoadVcblFromFile.class);
 
 	private static String vocabulary_path;
@@ -41,84 +40,107 @@ public class LoadVcblFromFile {
 	}
 
 	public static void main(String[] args) throws Exception {
-		DownloadWordList("/Users/jing.wang/Desktop/word/u7.txt");
+		// DownloadWordList(args[0]);
+		DownloadWordList("/Users/jing.wang/Desktop/word/common.txt");
 	}
 
-	public static void DownloadWordList(String wordlistfilepath) throws Exception
-	{
+	public static void DownloadWordList(String wordlistfilepath) throws Exception {
 		File fileWordList = new File(wordlistfilepath);
-		
+
 		String filename = fileWordList.getName().substring(0, fileWordList.getName().indexOf("."));
-		String manifestfolder = vocabulary_path + Start.file_separator + filename;
-		String explain_path = manifestfolder + Start.file_separator + "explain" ;
-		String mp3_path = manifestfolder + Start.file_separator + "mp3" ;
+		String manifest_file = vocabulary_path + Start.file_separator + filename;
+		String explain_path = vocabulary_path + Start.file_separator + "explain";
+		String mp3_path = vocabulary_path + Start.file_separator + "mp3";
 		// create a folder
-		FileUtils.forceMkdir(new File(manifestfolder));
 		FileUtils.forceMkdir(new File(explain_path));
 		FileUtils.forceMkdir(new File(mp3_path));
-		File Manifestwordlist= new File(manifestfolder,fileWordList.getName());
-		
-		FileUtils.writeStringToFile(Manifestwordlist,"",false); //clear contents
+		File Manifestwordlist = new File(manifest_file);
+
+		FileUtils.writeStringToFile(Manifestwordlist, "", false); // clear contents
 		List<String> Wordlist = FileUtils.readLines(new File(wordlistfilepath), "UTF-8");
 		// write word list to a manifest file
 		Iterator<String> it = Wordlist.iterator();
 		while (it.hasNext()) {
 			String word = it.next();
-			DownloadAWord(word,explain_path,mp3_path);
-			FileUtils.writeStringToFile(Manifestwordlist, word+Start.line_separator, "UTF-8", true); 
+			if (word.trim().equals("")) {
+				continue;
+			} else {
+
+				DownloadAWord(word, explain_path, mp3_path);
+				FileUtils.writeStringToFile(Manifestwordlist, word + Start.line_separator, "UTF-8", true);
+			}
 		}
 	}
 
 	public static void DownloadAWord(String word, String explain_path, String mp3_path) throws Exception {
 
-		FanyiV3Util fv3U = new FanyiV3Util();
+		File explain_txt = new File(explain_path + Start.file_separator + word + ".txt");
+		File mp3_file = new File(mp3_path + Start.file_separator + word + ".mp3");
 
-		YoudaoDictResponse YDDR = fv3U.requestForHttp(fv3U.createParams(word));
+		if (!explain_txt.exists() || !mp3_file.exists()) {
 
-		// write basic.explains into a text file named with word
-		Basic basicResponse = YDDR.getBasic();
+			FanyiV3Util fv3U = new FanyiV3Util();
 
-		String translation_result = "";
-		
-		String Ukphonetic=basicResponse.getUkphonetic();
-		
-		if (Ukphonetic!=null && Ukphonetic != null)
+			YoudaoDictResponse YDDR = fv3U.requestForHttp(fv3U.createParams(word));
+
+			if (!YDDR.getErrorCode().equals("0")) {
+				logger.error("#######################################################");
+				logger.error("Can not download word \"" + word + "\" from Youdao! because of error code:"
+						+ YDDR.getErrorCode());
+				logger.error("#######################################################");
+				return;
+			}
+
+			// write basic.explains into a text file named with word
+			Basic basicResponse = YDDR.getBasic();
+
+			String translation_result = "";
+
+			String Ukphonetic = basicResponse.getUkphonetic();
+
+			if (Ukphonetic != null && Ukphonetic != null) {
+				translation_result = translation_result + "UK phonetic: /" + Ukphonetic + "/\t";
+			}
+
+			String Usphonetic = basicResponse.getUsphonetic();
+
+			if (Usphonetic != null && Usphonetic != null) {
+				translation_result = translation_result + "US phonetic: /" + Usphonetic + "/";
+			}
+
+			if (translation_result != null) {
+				translation_result = "#Pronunciation#" + Start.line_separator + translation_result
+						+ Start.line_separator + Start.line_separator;
+			}
+
+			translation_result = translation_result + "#Translation#" + Start.line_separator;
+
+			for (String i : basicResponse.explains) {
+
+				int pos = i.toLowerCase().indexOf(word.toLowerCase());
+				while (pos != -1) {
+					try {
+						i = i.substring(0, pos) + i.substring(pos + word.length());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					pos = i.toLowerCase().indexOf(word.toLowerCase());
+				}
+
+				translation_result = translation_result + i + Start.line_separator;
+			}
+
+			FileUtils.writeStringToFile(explain_txt, translation_result, "UTF-8", false);
+
+			String MP3_Url = YDDR.getSpeakUrl();
+			FileUtils.writeByteArrayToFile(mp3_file, fv3U.requestForMp3(MP3_Url), false);
+		}
+		else
 		{
-			translation_result=translation_result+"UK phonetic: /"+Ukphonetic+"/\t";
-		}
-		
-		String Usphonetic=basicResponse.getUsphonetic();
-
-		if (Usphonetic!=null && Usphonetic != null)
-		{
-			translation_result=translation_result+"US phonetic: /"+Usphonetic+"/";
-		}
-		
-		if (translation_result != null)
-		{
-			translation_result=
-					"#Pronunciation#" + Start.line_separator
-					+ translation_result + Start.line_separator+ Start.line_separator;
-		}
-		
-		translation_result=translation_result
-				+"#Translation#"+Start.line_separator;
-		
-		
-		for (String i : basicResponse.explains) {
-			translation_result = translation_result+i + Start.line_separator;
+			logger.info("Word:"+word+" has been in existence, no need to download it again!");
 		}
 
-		FileUtils.writeStringToFile(new File(explain_path + Start.file_separator + word + ".txt"), translation_result,
-				"UTF-8", false);
-
-		// download voice by speakUrl and write a mp3 file named with work
-		String MP3_Url = YDDR.getSpeakUrl();
-
-		FileUtils.writeByteArrayToFile(new File(mp3_path + Start.file_separator + word + ".mp3"), fv3U.requestForMp3(MP3_Url),
-				false);
 	}
-	
-	
 
 }

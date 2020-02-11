@@ -112,6 +112,7 @@ public class ReviewWindow extends JFrame {
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wordindex=wordindex-1;
+				Start.LetterVoiceQueue.clear();
 				showword();
 			}
 		});
@@ -120,6 +121,7 @@ public class ReviewWindow extends JFrame {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wordindex=wordindex+1;
+				Start.LetterVoiceQueue.clear();
 				showword();
 			}
 		});

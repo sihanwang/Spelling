@@ -57,6 +57,7 @@ public class SpellingTestWindow extends JFrame {
 	
 	private void initUI()
 	{
+		Start.LetterVoiceQueue.clear();
 		for(String x : Start.wordlist)
 		{
 			WordQueue.add(x);
@@ -202,7 +203,7 @@ public class SpellingTestWindow extends JFrame {
 						           }
 						       });
 
-							String manifestfolder = Start.vocabulary_path + Start.file_separator + Start.wordlist_name;
+							String manifestfolder = Start.vocabulary_path ;
 
 							Date dNow = new Date( );
 						    SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
@@ -225,7 +226,9 @@ public class SpellingTestWindow extends JFrame {
 								}
 								
 								tr.score=(int)((((float)Start.wordlist.size())/(TotalTimes+Start.wordlist.size())*100));
-								FileUtils.writeStringToFile(TestReport, "Score:"+tr.score, "UTF-8", true); 
+								tr.total=Start.wordlist.size();
+								tr.tries=TotalTimes+Start.wordlist.size();
+								FileUtils.writeStringToFile(TestReport, "Score:"+tr.score +", Total word:"+tr.total+",  Total tries:"+String.valueOf(tr.tries), "UTF-8", true); 
 								
 								Start.LetterVoiceQueue.clear();
 								dispose();

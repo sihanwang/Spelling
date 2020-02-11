@@ -138,7 +138,7 @@ public class Start {
 	}
 
 	public static String ReadExplain(String word) {
-		String manifestfolder = vocabulary_path + file_separator + wordlist_name;
+		String manifestfolder = vocabulary_path;
 		String explain_path = manifestfolder + file_separator + "explain";
 
 		String Result = null;
@@ -219,8 +219,8 @@ public class Start {
 	}
 
 	public static void PlayMp3(String word) {
-		String manifestfolder = vocabulary_path + file_separator + wordlist_name;
-		String mp3_path = manifestfolder + file_separator + "mp3" + file_separator + word + ".mp3";
+		String manifestfolder = vocabulary_path ;
+		String mp3_path = manifestfolder + file_separator + "mp3" + file_separator + word.toLowerCase() + ".mp3";
 
 		try {
 			BufferedInputStream stream = new BufferedInputStream(new FileInputStream(mp3_path));
