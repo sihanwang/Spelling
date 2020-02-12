@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.log4j.PropertyConfigurator;
@@ -41,12 +44,20 @@ public class LoadVcblFromFile {
 
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
-		DownloadWordList("/Users/jing.wang/Desktop/word/common.txt");
+		
+		JFileChooser chooser = new JFileChooser();
+		chooser.setCurrentDirectory(new File(Start.vocabulary_path));
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		chooser.showDialog(new JLabel(), "Select");
+		File file = chooser.getSelectedFile();
+		
+		DownloadWordList(file);
+		logger.info("Done");
+		System.exit(0);
 	}
 
-	public static void DownloadWordList(String wordlistfilepath) throws Exception {
-		File fileWordList = new File(wordlistfilepath);
-
+	public static void DownloadWordList(File fileWordList) throws Exception {
+		
 		String filename = fileWordList.getName().substring(0, fileWordList.getName().indexOf("."));
 		String manifest_file = vocabulary_path + Start.file_separator + filename;
 		String explain_path = vocabulary_path + Start.file_separator + "explain";
@@ -57,7 +68,7 @@ public class LoadVcblFromFile {
 		File Manifestwordlist = new File(manifest_file);
 
 		FileUtils.writeStringToFile(Manifestwordlist, "", false); // clear contents
-		List<String> Wordlist = FileUtils.readLines(new File(wordlistfilepath), "UTF-8");
+		List<String> Wordlist = FileUtils.readLines(fileWordList, "UTF-8");
 		// write word list to a manifest file
 		Iterator<String> it = Wordlist.iterator();
 		while (it.hasNext()) {
