@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -54,6 +55,13 @@
 		</repository>
 	</repositories>
 
+	<scm>
+		<connection>scm:git:https://github.com/sihanwang/Spelling.git</connection>
+		<developerConnection>scm:git:https://github.com/sihanwang/Spelling.git</developerConnection>
+		<url>https://github.com/sihanwang/Spelling/tree/master</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -90,17 +98,24 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>3.0.0-M1</version>
+			</plugin>
+
 		</plugins>
 	</build>
-	
+
 	<distributionManagement>
-    <repository>
-        <id>rdc-releases</id>
-        <url>https://repo.rdc.aliyun.com/repository/121150-release-oAMpQx/</url>
-    </repository>
-    <snapshotRepository>
-        <id>rdc-snapshots</id>
-        <url>https://repo.rdc.aliyun.com/repository/121150-snapshot-CXUHl8/</url>
-    </snapshotRepository>
-</distributionManagement>
+		<repository>
+			<id>rdc-releases</id>
+			<url>https://repo.rdc.aliyun.com/repository/121150-release-oAMpQx/</url>
+		</repository>
+		<snapshotRepository>
+			<id>rdc-snapshots</id>
+			<url>https://repo.rdc.aliyun.com/repository/121150-snapshot-CXUHl8/</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
