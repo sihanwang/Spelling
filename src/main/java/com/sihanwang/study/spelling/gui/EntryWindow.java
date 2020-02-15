@@ -17,7 +17,10 @@ import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
 import java.io.File;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.awt.event.ActionEvent;
 import com.sihanwang.study.spelling.*;
 import javax.swing.GroupLayout;
@@ -70,12 +73,29 @@ public class EntryWindow extends JFrame {
 			chooser.setCurrentDirectory(new File(Start.vocabulary_path));
 			chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			chooser.showDialog(new JLabel(), "Select");
-			File file = chooser.getSelectedFile();
+			File wordlist_file = chooser.getSelectedFile();
+			
+			//////////
+			String wordlist_filename=wordlist_file.getName();
+			
+			if (wordlist_file.getName().endsWith("progress"))
+			{
+				try {
+					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(wordlist_file));
+					SpellingProgress oldProgress = (SpellingProgress)ois.readObject();
+					Start.wordlist_name=wordlist_file.getName().substring(0,wordlist_filename.indexOf("."));
 
+					STW = new SpellingTestWindow(oldProgress.getTotalwordnum(),oldProgress.getWordindex(),oldProgress.getWordQueue(), oldProgress.getErrorlist());
+					STW.setVisible(true);
+					
+				} catch (Exception e) {
+					logger.error("Error in reading progress",e);
+				}
+			}
+//////
 			try {
-				File wordlist = new File(file.getAbsoluteFile().toString());
-				Start.wordlist_name = wordlist.getName();
-				Start.wordlist = FileUtils.readLines(wordlist, "UTF-8");
+				Start.wordlist_name = wordlist_filename;
+				Start.wordlist = FileUtils.readLines(wordlist_file, "UTF-8");
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				logger.error("Failed to load work list:", e1);
