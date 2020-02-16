@@ -74,6 +74,11 @@ public class EntryWindow extends JFrame {
 			chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			chooser.showDialog(new JLabel(), "Select");
 			File wordlist_file = chooser.getSelectedFile();
+			
+			if (wordlist_file==null)
+			{
+				return;
+			}
 
 			//////////
 			String wordlist_filename = wordlist_file.getName();
