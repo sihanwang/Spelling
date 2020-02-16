@@ -58,7 +58,7 @@ public class SpellingTestWindow extends JFrame {
 	private JTextArea Meaning = new JTextArea();
 	private JLabel Statusbar = new JLabel();
 	private Logger logger = LoggerFactory.getLogger(SpellingTestWindow.class);
-
+	private File progress_file=null;
 
 
 	private void initUI(int twn,int wi, ArrayList<String> wq, HashMap<String, Integer> el ) {
@@ -72,32 +72,50 @@ public class SpellingTestWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		addWindowListener(new WindowAdapter() {
+
 			public void windowClosing(WindowEvent e) {
 				
 				int result = JOptionPane.showConfirmDialog(null, "Really exit an ongoing test？", "Exit?", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
-				if (result == JOptionPane.YES_OPTION)
+				if (result == JOptionPane.YES_OPTION )
 				{
-					//Serializw progress object into file
-					SpellingProgress sp=new SpellingProgress(totalwordnum,wordindex, errorlist, WordQueue);
-					
-					String manifestfolder = Start.vocabulary_path;
-					Date dNow = new Date();
-					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+					if (wordindex != 0) {
+						
+						//delete previous progress file if any
+						
+						if (progress_file!=null)
+						{
+							try {
+								FileUtils.forceDelete(progress_file);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								logger.error("Failed to delete progress file:"+progress_file.getName(),e);
+							}
+						}
 
-					File SpellingTestProgress = new File(manifestfolder,
-							Start.wordlist_name + "." + ft.format(dNow) + ".progress");
-					
-					try {
-						ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SpellingTestProgress));
-						oos.writeObject(sp);
-						oos.close();
-					} catch (Exception e1) {
-						logger.error("Can't write progress into file", e1);
+						
+						// Serializw progress object into file
+						SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue);
+
+						String manifestfolder = Start.vocabulary_path;
+						Date dNow = new Date();
+						SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+
+						File SpellingTestProgress = new File(manifestfolder,
+								Start.wordlist_name + "." + ft.format(dNow) + ".progress");
+
+						try {
+							ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SpellingTestProgress));
+							oos.writeObject(sp);
+							oos.close();
+						} catch (Exception e1) {
+							logger.error("Can't write progress into file", e1);
+						}
 					}
-
+					Start.EW.setVisible(true);
 					dispose();
 				}
+				
 				
 			}
 		});
@@ -212,8 +230,19 @@ public class SpellingTestWindow extends JFrame {
 						if (wordindex < WordQueue.size()) {
 							showword();
 						} else {
-
-							// complete
+							
+							//complete
+							
+							if (progress_file!=null)
+							{
+								try {
+									FileUtils.forceDelete(progress_file);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									logger.error("Failed to delete progress file:"+progress_file.getName(),e);
+								}
+							}
+							
 							InputField.setEnabled(false);
 							// reverse order by try times
 							List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String, Integer>>(
@@ -343,6 +372,15 @@ public class SpellingTestWindow extends JFrame {
 	 */
 	public SpellingTestWindow() {
 		
+		Start.EW.setVisible(false);
+		
+		if (Start.RW!=null)
+		{
+			Start.RW.dispose();;
+		}
+		
+		this.progress_file=null;
+		
 		ArrayList<String> tempWQ=new ArrayList<String>();
 		
 		for (String x : Start.wordlist) {
@@ -353,8 +391,16 @@ public class SpellingTestWindow extends JFrame {
 		initUI(Start.wordlist.size(),0,tempWQ,new HashMap<String, Integer>());
 	}
 	
-	public SpellingTestWindow(int twn, int wi, ArrayList<String> wq, HashMap<String, Integer> el ) {
+	public SpellingTestWindow(int twn, int wi, ArrayList<String> wq, HashMap<String, Integer> el, File pf ) {
+		Start.EW.setVisible(false);
+		
+		if (Start.RW!=null)
+		{
+			Start.RW.dispose();;
+		}
+		
 		initUI(twn, wi,wq,el);
+		this.progress_file=pf;
 	}
 
 	private void showword() {

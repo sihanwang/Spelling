@@ -47,7 +47,9 @@ public class Start {
 	
 	public static ArrayBlockingQueue<String> LetterVoiceQueue = new ArrayBlockingQueue<String>(30);
 	
-	private static EntryWindow EW;
+	public static EntryWindow EW;
+	public static ReviewWindow RW;
+	public static SpellingTestWindow STW;
 
 	static {
 		Properties prop = new Properties();
