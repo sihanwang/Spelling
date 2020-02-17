@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /ˈhelɪkɒptə(r)/	US phonetic: /ˈhelɪkɑːptər/
+
+#Translation#
+n. [航] 直升飞机
+vi. [航] 乘直升飞机
+vt. 由直升机运送

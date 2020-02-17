@@ -1,0 +1,5 @@
+#Pronunciation#
+UK phonetic: /ˌkɒnvəˈseɪʃn/	US phonetic: /ˌkɑːnvərˈseɪʃn/
+
+#Translation#
+n. 交谈，会话；社交；交往，交际；会谈；（人与计算机的）人机对话

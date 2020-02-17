@@ -45,11 +45,9 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-		JFileChooser chooser = new JFileChooser();
-		chooser.setCurrentDirectory(new File(Start.vocabulary_path));
-		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		chooser.showDialog(new JLabel(), "Select");
-		File file = chooser.getSelectedFile();
+	;
+		
+		File file = new File("/Users/jing.wang/Desktop/word/ket/ket_transport.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");
