@@ -51,6 +51,7 @@ public class SpellingTestWindow extends JFrame {
 	private int wordindex ;
 	private HashMap<String, Integer> errorlist ;
 	private ArrayList<String> WordQueue ;
+	private String TestType;
 	
 	private String word;
 	private JPanel contentPane = new JPanel();
@@ -61,11 +62,12 @@ public class SpellingTestWindow extends JFrame {
 	private File progress_file=null;
 
 
-	private void initUI(int twn,int wi, ArrayList<String> wq, HashMap<String, Integer> el ) {
+	private void initUI(int twn,int wi, ArrayList<String> wq, HashMap<String, Integer> el, String tt) {
 		totalwordnum=twn;
 		wordindex=wi;
 		WordQueue=wq;
 		errorlist=el;
+		TestType=tt;
 		Start.LetterVoiceQueue.clear();
 		setTitle("Test");
 
@@ -95,7 +97,7 @@ public class SpellingTestWindow extends JFrame {
 
 						
 						// Serializw progress object into file
-						SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue);
+						SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type);
 
 						String manifestfolder = Start.vocabulary_path;
 						Date dNow = new Date();
@@ -167,7 +169,9 @@ public class SpellingTestWindow extends JFrame {
 				// TODO Auto-generated method stub
 				try {
 					Start.LetterVoiceQueue.clear();
-					Start.LetterVoiceQueue.put(word.toLowerCase());
+					if (Start.test_type.equals("voice")) {
+						Start.LetterVoiceQueue.put(word.toLowerCase());
+					}
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					logger.error("InterruptedException", e1);
@@ -271,6 +275,7 @@ public class SpellingTestWindow extends JFrame {
 								TestReport tr = new TestReport();
 								int TotalTimes = 0;
 
+								//write incorrect tries
 								for (Map.Entry<String, Integer> me : list) {
 									tr.ErrorReport.put(me.getKey(), me.getValue());
 									TotalTimes = TotalTimes + me.getValue();
@@ -279,11 +284,16 @@ public class SpellingTestWindow extends JFrame {
 									FileUtils.writeStringToFile(TestReview, me.getKey() + Start.line_separator, "UTF-8",
 											true);
 								}
+								
+								//write test type
+								FileUtils.writeStringToFile(TestReport, "Test type:"+Start.test_type+ Start.line_separator, "UTF-8",true);
 
+								//write score
 								tr.score = (int) ((((float) totalwordnum)
 										/ (TotalTimes + totalwordnum) * 100));
 								tr.total = totalwordnum;
 								tr.tries = TotalTimes + totalwordnum;
+								tr.testtype=TestType;
 								FileUtils.writeStringToFile(TestReport, "Score:" + tr.score + ", Total word:" + tr.total
 										+ ",  Total tries:" + String.valueOf(tr.tries), "UTF-8", true);
 
@@ -323,6 +333,13 @@ public class SpellingTestWindow extends JFrame {
 								+ "          Try times:" + times);
 
 						Start.LetterVoiceQueue.clear();
+						try {
+							Start.LetterVoiceQueue.put(word.toLowerCase());
+						} catch (InterruptedException e1) {
+							// TODO Auto-generated catch block
+							logger.error("InterruptedException", e1);
+						}
+						
 						InputField.setEditable(false);
 						InputField.setForeground(Color.red);
 						InputField.setText(word);
@@ -388,10 +405,10 @@ public class SpellingTestWindow extends JFrame {
 		}
 		Collections.shuffle(tempWQ);
 		
-		initUI(Start.wordlist.size(),0,tempWQ,new HashMap<String, Integer>());
+		initUI(Start.wordlist.size(),0,tempWQ,new HashMap<String, Integer>(),Start.test_type);
 	}
 	
-	public SpellingTestWindow(int twn, int wi, ArrayList<String> wq, HashMap<String, Integer> el, File pf ) {
+	public SpellingTestWindow(int twn, int wi, ArrayList<String> wq, HashMap<String, Integer> el, File pf, String tt ) {
 		Start.EW.setVisible(false);
 		
 		if (Start.RW!=null)
@@ -399,7 +416,7 @@ public class SpellingTestWindow extends JFrame {
 			Start.RW.dispose();;
 		}
 		
-		initUI(twn, wi,wq,el);
+		initUI(twn, wi,wq,el,tt);
 		this.progress_file=pf;
 	}
 
@@ -407,7 +424,13 @@ public class SpellingTestWindow extends JFrame {
 		word = WordQueue.get(wordindex);
 		InputField.setText("");
 
-		Meaning.setText(Start.ReadExplain(word));
+		String meaning_display=Start.ReadExplain(word);
+		if (TestType.equals("translation"))
+		{
+			meaning_display=meaning_display.substring(meaning_display.indexOf("#Translation#"));
+		}
+		
+		Meaning.setText(meaning_display);
 
 		Integer times = errorlist.get(word);
 		if (times == null) {
@@ -417,11 +440,13 @@ public class SpellingTestWindow extends JFrame {
 		Statusbar.setText(
 				"Progress:" + String.valueOf(wordindex + 1) + "/" + WordQueue.size() + "          Try times:" + times);
 
-		try {
-			Start.LetterVoiceQueue.put(word.toLowerCase());
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			logger.error("InterruptedException", e1);
+		if (TestType.equals("voice")) {
+			try {
+				Start.LetterVoiceQueue.put(word.toLowerCase());
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				logger.error("InterruptedException", e1);
+			}
 		}
 
 	}

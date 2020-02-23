@@ -89,9 +89,10 @@ public class EntryWindow extends JFrame {
 					ObjectInputStream ois = new ObjectInputStream(new FileInputStream(wordlist_file));
 					SpellingProgress oldProgress = (SpellingProgress) ois.readObject();
 					Start.wordlist_name = wordlist_file.getName().substring(0, wordlist_filename.indexOf("."));
+			
 
 					STW = new SpellingTestWindow(oldProgress.getTotalwordnum(), oldProgress.getWordindex(),
-							oldProgress.getWordQueue(), oldProgress.getErrorlist(),wordlist_file);
+							oldProgress.getWordQueue(), oldProgress.getErrorlist(), wordlist_file, oldProgress.getTesttype());
 					STW.setVisible(true);
 					
 				} catch (Exception e) {

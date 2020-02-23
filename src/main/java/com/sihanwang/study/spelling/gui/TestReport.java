@@ -28,6 +28,7 @@ public class TestReport extends JFrame  {
 	public int score;
 	public int total;
 	public int tries;
+	public String testtype;
 	private JPanel contentPane;
 	private JTextArea table= new JTextArea();
 	private JLabel  lblScore = new JLabel("Your Score:");
@@ -124,7 +125,7 @@ public class TestReport extends JFrame  {
 		
 		lblScore.setText("Your Score:"+score);
 		
-		String errorList=new String("Total word:"+total+",  Total tries:"+String.valueOf(tries))+Start.line_separator;
+		String errorList=new String("Test type:"+this.testtype+Start.line_separator+"Total word:"+total+",  Total tries:"+String.valueOf(tries))+Start.line_separator;
 		
 		for (Map.Entry<String, Integer> errorWord :  ErrorReport.entrySet())
 		{

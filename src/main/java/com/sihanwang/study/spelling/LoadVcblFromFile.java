@@ -47,7 +47,7 @@ public class LoadVcblFromFile {
 		
 	;
 		
-		File file = new File("/Users/jing.wang/Desktop/word/WWW4A_DAY2.txt");
+		File file = new File("/Users/jing.wang/Desktop/word/WWW4A_DAY3.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");

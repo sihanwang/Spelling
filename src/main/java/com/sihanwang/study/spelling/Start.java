@@ -36,6 +36,8 @@ public class Start {
 	private static Logger logger = LoggerFactory.getLogger(Start.class);
 
 	public static String vocabulary_path = null;
+	
+	public static String test_type=null;
 
 	public static List<String> wordlist = null;
 
@@ -58,9 +60,12 @@ public class Start {
 		try {
 			FileInputStream fis = new FileInputStream(spelling_cfg);
 			prop.load(fis);
-			vocabulary_path = prop.getProperty("vocabulary_folder");
 			
-			String voice_path = prop.getProperty("voice_folder");
+			test_type = prop.getProperty("test_type").trim();
+			
+			vocabulary_path = prop.getProperty("vocabulary_folder").trim();
+			
+			String voice_path = prop.getProperty("voice_folder").trim();
 
 			Spelling_Voice.put("a", FileUtils.readFileToByteArray(new File(voice_path, "a.mp3")));
 			Spelling_Voice.put("b", FileUtils.readFileToByteArray(new File(voice_path, "b.mp3")));
