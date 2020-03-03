@@ -1,7 +1,16 @@
 package com.sihanwang.study.spelling;
 
+import java.awt.DisplayMode;
 import java.awt.EventQueue;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Window;
 import java.util.concurrent.ArrayBlockingQueue;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -9,6 +18,7 @@ import java.io.FileInputStream;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -42,6 +52,9 @@ public class Start {
 	public static List<String> wordlist = null;
 
 	public static String wordlist_name = null;
+	
+	public static GraphicsDevice device;
+	
 
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
 	private static HashMap<String, byte[]> SoundEffect = new HashMap<String, byte[]>();
@@ -56,6 +69,7 @@ public class Start {
 	static {
 		Properties prop = new Properties();
 		PropertyConfigurator.configure(log4jcfg);
+		device=GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 
 		try {
 			FileInputStream fis = new FileInputStream(spelling_cfg);
@@ -135,8 +149,35 @@ public class Start {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EW = new EntryWindow();
-					EW.setVisible(true);
+					JFileChooser chooser = new JFileChooser();
+					chooser.setCurrentDirectory(new File(Start.vocabulary_path));
+					chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					chooser.showDialog(new JLabel(), "Select");
+					
+					File file=chooser.getSelectedFile();
+					if (file.getName().endsWith("progress")) {
+						//continue previous test
+						try {
+							ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+							SpellingProgress oldProgress = (SpellingProgress) ois.readObject();
+							Start.wordlist_name = file.getName().substring(0, file.getName().indexOf("."));
+					
+							Start.STW = new SpellingTestWindow(oldProgress.getTotalwordnum(), oldProgress.getWordindex(),
+									oldProgress.getWordQueue(), oldProgress.getErrorlist(), file, oldProgress.getTesttype());
+							setFullScreen(Start.STW);
+							
+						} catch (Exception e) {
+							logger.error("Error in reading progress", e);
+						}
+					}
+					else
+					{
+
+						EW = new EntryWindow(chooser.getSelectedFile());
+						setFullScreen(EW);
+					
+					}
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -242,4 +283,20 @@ public class Start {
 		}
 
 	}
+	
+	public static void setFullScreen(JFrame window) {
+		window.dispose();
+		window.setUndecorated(true);
+		window.setResizable(false);
+		device.setFullScreenWindow(window);
+	}
+	
+	public void restoreScreen() {
+		Window window = device.getFullScreenWindow();
+		if (window != null) {
+			window.dispose();
+		}
+		device.setFullScreenWindow(null);
+	}
+
 }

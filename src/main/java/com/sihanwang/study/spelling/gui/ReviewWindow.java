@@ -35,6 +35,7 @@ public class ReviewWindow extends JFrame {
 
 	private JButton btnPrevious = new JButton("Previous");
 	private JButton btnNext = new JButton("Next");
+	private JButton btnExit = new JButton("Exit");
 	private JLabel Statusbar = new JLabel();
 
 	private Logger logger = LoggerFactory.getLogger(ReviewWindow.class);
@@ -76,11 +77,11 @@ public class ReviewWindow extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 
 		GroupLayout.SequentialGroup hButtonGroup = gl_contentPane.createSequentialGroup();
-		hButtonGroup.addGap(25, 50, 100).addComponent(btnPrevious, 50, 100, 100).addGap(25, 50, 100)
+		hButtonGroup.addGap(25, 50, 100).addComponent(btnPrevious, 50, 100, 100).addGap(25, 50, 100).addComponent(btnExit,50,100,100).addGap(25, 50, 100)
 				.addComponent(btnNext, 50, 100, 100).addGap(25, 50, 100);
 
 		GroupLayout.ParallelGroup vButtonGroup = gl_contentPane.createParallelGroup();
-		vButtonGroup.addComponent(btnPrevious, GroupLayout.Alignment.CENTER).addComponent(btnNext,
+		vButtonGroup.addComponent(btnPrevious, GroupLayout.Alignment.CENTER).addComponent(btnExit, GroupLayout.Alignment.CENTER).addComponent(btnNext,
 				GroupLayout.Alignment.CENTER);
 
 		GroupLayout.SequentialGroup hGroup = gl_contentPane.createSequentialGroup();
@@ -106,19 +107,11 @@ public class ReviewWindow extends JFrame {
 
 		pack();
 
-		setSize(1024, 768);
+		//setSize(1024, 768);
 
 		////////////////////////////
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-		addWindowListener(new WindowAdapter() {
-
-			public void windowClosing(WindowEvent e) {
-					Start.EW.setVisible(true);
-					dispose();
-				}
-				
-			});	
 		
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,6 +119,11 @@ public class ReviewWindow extends JFrame {
 				Start.LetterVoiceQueue.clear();
 				showword();
 			}
+		});
+		
+		btnExit.addActionListener((event) -> {
+			Start.setFullScreen(Start.EW);
+			dispose();
 		});
 
 		btnNext.addActionListener(new ActionListener() {

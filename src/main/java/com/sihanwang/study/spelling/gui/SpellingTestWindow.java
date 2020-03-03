@@ -44,6 +44,7 @@ import com.sihanwang.study.spelling.SpellingProgress;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 
 public class SpellingTestWindow extends JFrame {
 
@@ -60,7 +61,7 @@ public class SpellingTestWindow extends JFrame {
 	private JLabel Statusbar = new JLabel();
 	private Logger logger = LoggerFactory.getLogger(SpellingTestWindow.class);
 	private File progress_file=null;
-
+	private JButton btnExit = new JButton("Exit");
 
 	private void initUI(int twn,int wi, ArrayList<String> wq, HashMap<String, Integer> el, String tt) {
 		totalwordnum=twn;
@@ -72,59 +73,63 @@ public class SpellingTestWindow extends JFrame {
 		setTitle("Test");
 
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
+		btnExit.addActionListener((event) -> {
 
-		addWindowListener(new WindowAdapter() {
-
-			public void windowClosing(WindowEvent e) {
-				
-				int result = JOptionPane.showConfirmDialog(null, "Really exit an ongoing test？", "Exit?", JOptionPane.YES_NO_OPTION,
-						JOptionPane.QUESTION_MESSAGE);
-				if (result == JOptionPane.YES_OPTION )
-				{
-					if (wordindex != 0) {
-						
-						//delete previous progress file if any
-						
-						if (progress_file!=null)
-						{
-							try {
-								FileUtils.forceDelete(progress_file);
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								logger.error("Failed to delete progress file:"+progress_file.getName(),e);
-							}
-						}
-
-						
-						// Serializw progress object into file
-						SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type);
-
-						String manifestfolder = Start.vocabulary_path;
-						Date dNow = new Date();
-						SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
-
-						File SpellingTestProgress = new File(manifestfolder,
-								Start.wordlist_name + "." + ft.format(dNow) + ".progress");
-
+				if (wordindex != 0) {
+					
+					//delete previous progress file if any
+					
+					if (progress_file!=null)
+					{
 						try {
-							ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SpellingTestProgress));
-							oos.writeObject(sp);
-							oos.close();
-						} catch (Exception e1) {
-							logger.error("Can't write progress into file", e1);
+							FileUtils.forceDelete(progress_file);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							logger.error("Failed to delete progress file:"+progress_file.getName(),e1);
 						}
 					}
-					Start.EW.setVisible(true);
-					dispose();
+
+					
+					// Serializw progress object into file
+					SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type);
+
+					String manifestfolder = Start.vocabulary_path;
+					Date dNow = new Date();
+					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
+
+					File SpellingTestProgress = new File(manifestfolder,
+							Start.wordlist_name + "." + ft.format(dNow) + ".progress");
+
+					try {
+						ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SpellingTestProgress));
+						oos.writeObject(sp);
+						oos.close();
+					} catch (Exception e1) {
+						logger.error("Can't write progress into file", e1);
+					}
+				}
+			
+				dispose();
+				
+				if (Start.EW!=null)
+				{
+					Start.setFullScreen(Start.EW);
+				}
+				else
+				{
+					System.exit(0);
 				}
 				
-				
-			}
 		});
+
+
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
+
+		
 		InputField.setEditable(true);
 		InputField.setFont(new Font("Arial Unicode MS", Font.BOLD, 56));
 		InputField.setForeground(Color.black);
@@ -138,12 +143,20 @@ public class SpellingTestWindow extends JFrame {
 		////////////////////////////
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		contentPane.setLayout(gl_contentPane);
+		
+		GroupLayout.SequentialGroup hButtonGroup = gl_contentPane.createSequentialGroup();
+		hButtonGroup.addGap(25, 50, 100).addComponent(btnExit,50,100,100).addGap(25, 50, 100);
 
+		GroupLayout.ParallelGroup vButtonGroup = gl_contentPane.createParallelGroup();
+		vButtonGroup.addComponent(btnExit, GroupLayout.Alignment.CENTER);
+		
 		GroupLayout.SequentialGroup hGroup = gl_contentPane.createSequentialGroup();
 		hGroup.addGap(10);
 		hGroup.addGroup(gl_contentPane.createParallelGroup().addComponent(InputField, GroupLayout.Alignment.LEADING)
 				.addComponent(Meaning, GroupLayout.Alignment.LEADING)
+				.addGroup(GroupLayout.Alignment.CENTER, hButtonGroup)
 				.addComponent(Statusbar, GroupLayout.Alignment.LEADING));
+				
 		hGroup.addGap(10);
 
 		gl_contentPane.setHorizontalGroup(hGroup);
@@ -155,12 +168,14 @@ public class SpellingTestWindow extends JFrame {
 		vGroup.addComponent(Meaning, 100, 300, 1024);
 
 		vGroup.addGap(10);
+		vGroup.addGroup(vButtonGroup);
+		vGroup.addGap(10);
+		
 		vGroup.addComponent(Statusbar, 15, 15, 15);
 		gl_contentPane.setVerticalGroup(vGroup);
 
 		pack();
-		setSize(1024, 768);
-
+		
 		////////////////////////////
 		InputField.addMouseListener(new MouseListener() {
 
@@ -208,6 +223,12 @@ public class SpellingTestWindow extends JFrame {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
+
+				int code = e.getKeyChar();
+				
+				if (!((code > 64 && code < 91) || (code > 96 && code < 123) || (code == 32) || (code == 8))) {
+					e.consume();
+				}
 
 			}
 
@@ -300,7 +321,7 @@ public class SpellingTestWindow extends JFrame {
 								Start.LetterVoiceQueue.clear();
 								dispose();
 								tr.initUI();
-								tr.setVisible(true);
+								Start.setFullScreen(tr);
 
 							} catch (IOException e1) {
 								// TODO Auto-generated catch block
@@ -321,6 +342,8 @@ public class SpellingTestWindow extends JFrame {
 						}
 
 						errorlist.put(word, times);
+						
+						
 
 						// wrong
 						// put wrong word to the end of queue
@@ -333,12 +356,9 @@ public class SpellingTestWindow extends JFrame {
 								+ "          Try times:" + times);
 
 						Start.LetterVoiceQueue.clear();
-						try {
-							Start.LetterVoiceQueue.put(word.toLowerCase());
-						} catch (InterruptedException e1) {
-							// TODO Auto-generated catch block
-							logger.error("InterruptedException", e1);
-						}
+						Start.PlayEffect("bit");
+						
+						Start.PlaySpelling(word.toLowerCase());
 						
 						InputField.setEditable(false);
 						InputField.setForeground(Color.red);
@@ -355,12 +375,13 @@ public class SpellingTestWindow extends JFrame {
 							}
 						}, 3000);
 
-						Start.PlayEffect("bit");
+						
 					}
 
 					return;
 
 				}
+				
 
 				try {
 					Start.LetterVoiceQueue.put(String.valueOf(e.getKeyChar()).toLowerCase());
@@ -409,7 +430,6 @@ public class SpellingTestWindow extends JFrame {
 	}
 	
 	public SpellingTestWindow(int twn, int wi, ArrayList<String> wq, HashMap<String, Integer> el, File pf, String tt ) {
-		Start.EW.setVisible(false);
 		
 		if (Start.RW!=null)
 		{

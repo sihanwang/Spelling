@@ -119,8 +119,6 @@ public class TestReport extends JFrame  {
 		
 		
 		///////////////////////////
-		setSize(800,600);
-		
 		//set score;
 		
 		lblScore.setText("Your Score:"+score);
