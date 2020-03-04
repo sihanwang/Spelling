@@ -94,11 +94,11 @@ public class SpellingTestWindow extends JFrame {
 					// Serializw progress object into file
 					SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type);
 
-					String manifestfolder = Start.vocabulary_path;
+					String progressFolder = Start.progressFolder;
 					Date dNow = new Date();
 					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
 
-					File SpellingTestProgress = new File(manifestfolder,
+					File SpellingTestProgress = new File(progressFolder,
 							Start.wordlist_name + "." + ft.format(dNow) + ".progress");
 
 					try {
@@ -280,14 +280,15 @@ public class SpellingTestWindow extends JFrame {
 								}
 							});
 
-							String manifestfolder = Start.vocabulary_path;
+							String reportFolder = Start.reportFolder;
+							String reviewFolder = Start.reviewFolder;
 
 							Date dNow = new Date();
 							SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmss");
 
-							File TestReport = new File(manifestfolder,
+							File TestReport = new File(reportFolder,
 									Start.wordlist_name + "." + ft.format(dNow) + ".report");
-							File TestReview = new File(manifestfolder,
+							File TestReview = new File(reviewFolder,
 									Start.wordlist_name + "." + ft.format(dNow) + ".review");
 
 							try {

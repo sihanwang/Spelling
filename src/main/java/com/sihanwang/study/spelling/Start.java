@@ -47,6 +47,12 @@ public class Start {
 
 	public static String vocabulary_path = null;
 	
+	public static String reportFolder= null;
+	
+	public static String progressFolder=null;
+	
+	public static String reviewFolder=null;
+	
 	public static String test_type=null;
 
 	public static List<String> wordlist = null;
@@ -78,6 +84,12 @@ public class Start {
 			test_type = prop.getProperty("test_type").trim();
 			
 			vocabulary_path = prop.getProperty("vocabulary_folder").trim();
+			
+			reportFolder=prop.getProperty("report_folder").trim();
+			
+			reviewFolder=prop.getProperty("review_folder").trim();
+			
+			progressFolder=prop.getProperty("progress_folder").trim();
 			
 			String voice_path = prop.getProperty("voice_folder").trim();
 
@@ -289,6 +301,7 @@ public class Start {
 		window.setUndecorated(true);
 		window.setResizable(false);
 		device.setFullScreenWindow(window);
+		//window.setVisible(true);
 	}
 	
 	public void restoreScreen() {
