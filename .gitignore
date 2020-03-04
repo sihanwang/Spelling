@@ -3,9 +3,8 @@
 /.settings/
 /log/test.*
 /target/archive-tmp/
-/target/checkout
-/target/classes
-/target/generated-sources
-/target/maven-archiver
-/target/maven-status
-/target/
+/target/checkout/
+/target/classes/
+/target/generated-sources/
+/target/maven-archiver/
+/target/maven-status/
