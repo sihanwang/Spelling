@@ -47,3 +47,4 @@ museum
 buy
 swim
 wear
+beautiful

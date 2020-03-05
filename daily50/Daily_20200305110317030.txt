@@ -1,3 +1,23 @@
+vegetable
+waitress
+onion
+meat
+pepper
+lemonade
+main course
+menu
+mineral water
+pasta
+sandwich
+slice
+snack
+soup
+cake
+omelette
+meal
+grill
+grilled
+milk
 switch
 medallion
 raincoat
@@ -13,7 +33,6 @@ snowy
 windy
 foggy
 journey
-kilometre
 plant
 survive
 sell
@@ -29,11 +48,3 @@ tornado
 wind
 cloud
 lift
-suddenly
-toward
-scary
-drive
-spring
-careful
-drop
-away
