@@ -167,6 +167,11 @@ public class Start {
 					chooser.showDialog(new JLabel(), "Select");
 					
 					File file=chooser.getSelectedFile();
+					if (file == null)
+					{
+						return;
+					}
+					
 					if (file.getName().endsWith("progress")) {
 						//continue previous test
 						try {
