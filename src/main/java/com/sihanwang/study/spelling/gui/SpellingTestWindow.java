@@ -131,6 +131,7 @@ public class SpellingTestWindow extends JFrame {
 
 		
 		InputField.setEditable(true);
+		InputField.enableInputMethods(false);
 		InputField.setFont(new Font("Arial Unicode MS", Font.BOLD, 56));
 		InputField.setForeground(Color.black);
 
