@@ -69,11 +69,9 @@ public class daily50 {
 					}
 				} else {
 					// create new word file
-					Date dNow = new Date();
-					SimpleDateFormat ft = new SimpleDateFormat("yyyyMMddhhmmssSSS");
-					File NewDailyFile = new File(vocabularyPath, "Daily" + "_" + ft.format(dNow) + ".txt");
+					File NewDailyFile = new File(vocabularyPath, "Daily" + "_" + String.format("%04d", allSourceFile.size()+1) + ".txt");
 					FileUtils.writeStringToFile(NewDailyFile, word + Start.line_separator, "UTF-8", false);
-					
+					allSourceFile.add(NewDailyFile);
 					logger.info("Created new daily file:"+NewDailyFile.getAbsolutePath());
 					
 					if (WORD_NUM > 1) {
