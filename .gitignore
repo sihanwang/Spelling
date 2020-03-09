@@ -1,7 +1,7 @@
 .classpath
 .project
 /.settings/
-/log/test.*
+/log/
 /target/archive-tmp/
 /target/checkout/
 /target/classes/
