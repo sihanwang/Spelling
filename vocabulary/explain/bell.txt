@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /bel/	US phonetic: /bel/
+
+#Translation#
+n. 铃，钟；钟声，铃声；钟状物
+vt. 装钟于，系铃于
+vi. 鸣钟；成钟状鼓起
