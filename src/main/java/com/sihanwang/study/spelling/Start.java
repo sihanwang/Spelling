@@ -54,6 +54,12 @@ public class Start {
 	public static String reviewFolder=null;
 	
 	public static String test_type=null;
+	
+	public static String dailyReviewProgressFile=null;
+	
+	public static String dailyReviewListFolder=null;
+	
+	public static int dailyReviewBackDays=0;
 
 	public static List<String> wordlist = null;
 
@@ -80,6 +86,23 @@ public class Start {
 		try {
 			FileInputStream fis = new FileInputStream(spelling_cfg);
 			prop.load(fis);
+			
+			/////////////////////////////////////////////////
+			//Load configurations for daily review
+			String dailyReviewCfg=prop.getProperty("daily_review_cfg").trim();
+			FileInputStream fisDailyReviewCfg = new FileInputStream(dailyReviewCfg);
+			
+			Properties propDailyReviewProperties = new Properties();
+			
+			propDailyReviewProperties.load(fisDailyReviewCfg);
+			
+			dailyReviewProgressFile=propDailyReviewProperties.getProperty("dailyreview_progress_file").trim();
+			
+			dailyReviewListFolder=propDailyReviewProperties.getProperty("dailyreview_list_folder").trim();
+			
+			dailyReviewBackDays=Integer.valueOf(propDailyReviewProperties.getProperty("review_back_days").trim());
+			
+			/////////////////////////////////////////////////
 			
 			test_type = prop.getProperty("test_type").trim();
 			
