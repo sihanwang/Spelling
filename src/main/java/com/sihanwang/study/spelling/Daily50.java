@@ -14,7 +14,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class daily50 {
+public class Daily50 {
 	
 	private static final String log4jcfg = "../cfg/log4j.properties";
 

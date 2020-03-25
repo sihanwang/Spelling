@@ -11,16 +11,16 @@ public class SpellingProgress implements Serializable {
 	private HashMap<String, Integer> errorlist ;
 	private ArrayList<String> WordQueue;
 	private String testtype;
-	
+	private DailyReviewProgress DReviewProgress=null;
 
-
-	public SpellingProgress(int twn, int wi, HashMap<String, Integer> el, ArrayList<String> wq, String tt) {
+	public SpellingProgress(int twn, int wi, HashMap<String, Integer> el, ArrayList<String> wq, String tt, DailyReviewProgress DRP) {
 		super();
 		this.totalwordnum = twn;
 		this.wordindex = wi;
 		this.errorlist = el;
 		this.WordQueue = wq;
 		this.testtype=tt;
+		this.DReviewProgress=DRP;
 	}
 	
 	public int getTotalwordnum()
@@ -44,4 +44,8 @@ public class SpellingProgress implements Serializable {
 		return testtype;
 	}
 
+	public DailyReviewProgress getDReviewProgress() {
+		return DReviewProgress;
+	}
+	
 }

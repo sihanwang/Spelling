@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -39,6 +40,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sihanwang.study.spelling.Start;
+import com.sihanwang.study.spelling.Daily50;
+import com.sihanwang.study.spelling.DailyReviewProgress;
 import com.sihanwang.study.spelling.SpellingProgress;
 
 import javax.swing.JTextArea;
@@ -92,7 +95,7 @@ public class SpellingTestWindow extends JFrame {
 
 					
 					// Serializw progress object into file
-					SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type);
+					SpellingProgress sp = new SpellingProgress(totalwordnum, wordindex, errorlist, WordQueue,Start.test_type,Start.DReviewProgress);
 
 					String progressFolder = Start.progressFolder;
 					Date dNow = new Date();
@@ -307,6 +310,58 @@ public class SpellingTestWindow extends JFrame {
 									FileUtils.writeStringToFile(TestReview, me.getKey() + Start.line_separator, "UTF-8",
 											true);
 								}
+								
+								
+								//Write daily review progress
+								if (Start.DReviewProgress!=null)
+								{
+									
+									int dailyIndex=1;
+									
+									List<File> allSourceFile = Daily50.searchFiles(new File(Start.dailyReviewListFolder, Start.dailyReviewListFolder));
+									
+									if(Start.DReviewProgress.getDailyIndex() <allSourceFile.size())
+									{
+										dailyIndex=Start.DReviewProgress.getDailyIndex()+1;
+									}
+									
+									LinkedList<String> toBeReviewed=Start.DReviewProgress.getToBeReviewed();
+									
+									
+									if (toBeReviewed.size()<Start.dailyReviewBackDays)
+									{
+										toBeReviewed.add(TestReview.getName());
+									}
+									
+									if (toBeReviewed.size()>Start.dailyReviewBackDays)
+									{
+										toBeReviewed.removeFirst();
+									}
+									
+									DailyReviewProgress DRP=new DailyReviewProgress(dailyIndex, toBeReviewed);
+									
+									File dailReviewProgressFile = new File(Start.progressFolder, Start.dailyReviewProgressFile);
+									
+									if (dailReviewProgressFile.exists())
+									{
+										try {
+											FileUtils.forceDelete(dailReviewProgressFile);
+										} catch (IOException e1) {
+											// TODO Auto-generated catch block
+											logger.error("Failed to delete old daily progress file:"+dailReviewProgressFile.getName(),e1);
+										}
+									}
+									
+									try {
+										ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dailReviewProgressFile));
+										oos.writeObject(DRP);
+										oos.close();
+									} catch (Exception e1) {
+										logger.error("Can't write daily progress into file", e1);
+									}
+								}
+								
+								
 								
 								//write test type
 								FileUtils.writeStringToFile(TestReport, "Test type:"+Start.test_type+ Start.line_separator, "UTF-8",true);

@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -67,6 +68,7 @@ public class Start {
 	
 	public static GraphicsDevice device;
 	
+	public static DailyReviewProgress DReviewProgress=null;
 
 	private static HashMap<String, byte[]> Spelling_Voice = new HashMap<String, byte[]>();
 	private static HashMap<String, byte[]> SoundEffect = new HashMap<String, byte[]>();
@@ -101,6 +103,7 @@ public class Start {
 			dailyReviewListFolder=propDailyReviewProperties.getProperty("dailyreview_list_folder").trim();
 			
 			dailyReviewBackDays=Integer.valueOf(propDailyReviewProperties.getProperty("review_back_days").trim());
+			
 			
 			/////////////////////////////////////////////////
 			
@@ -192,14 +195,35 @@ public class Start {
 					File file=chooser.getSelectedFile();
 					if (file == null)
 					{
-						return;
+						//Check if DailyReviewProgress exists
+						File dailyReviewProgress = new File(progressFolder,dailyReviewProgressFile);
+						
+						if (dailyReviewProgress.exists())
+						{
+							ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dailyReviewProgress));
+							DReviewProgress = (DailyReviewProgress) ois.readObject();
+						}
+						else
+						{
+							DReviewProgress = new DailyReviewProgress(0,new ArrayList<String>());
+						}
+						
+						int dailyIndex=DReviewProgress.getDailyIndex();
+						
+						Start.wordlist_name="Daily" + "_" + String.format("%04d", dailyIndex) + ".txt";
+						
+						EW = new EntryWindow(new File(dailyReviewListFolder,Start.wordlist_name));
+						setFullScreen(EW);
+						
 					}
-					
-					if (file.getName().endsWith("progress")) {
+					else if (file.getName().endsWith("progress")) {
 						//continue previous test
 						try {
 							ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 							SpellingProgress oldProgress = (SpellingProgress) ois.readObject();
+							
+							DReviewProgress = oldProgress.getDReviewProgress();
+							
 							Start.wordlist_name = file.getName().substring(0, file.getName().indexOf("."));
 					
 							Start.STW = new SpellingTestWindow(oldProgress.getTotalwordnum(), oldProgress.getWordindex(),
@@ -212,10 +236,8 @@ public class Start {
 					}
 					else
 					{
-
-						EW = new EntryWindow(chooser.getSelectedFile());
+						EW = new EntryWindow(file);
 						setFullScreen(EW);
-					
 					}
 					
 				} catch (Exception e) {

@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import com.sihanwang.study.spelling.*;
 import javax.swing.GroupLayout;
@@ -61,8 +62,18 @@ public class EntryWindow extends JFrame {
 		}
 
 		try {
-			Start.wordlist_name = file.getName();
 			Start.wordlist = FileUtils.readLines(wordlist_file, "UTF-8");
+			
+			if (Start.DReviewProgress!=null)
+			{
+				ArrayList<String> toBeReviewed=Start.DReviewProgress.getToBeReviewed();
+				
+				for (String tobereviewd : toBeReviewed)
+				{
+					Start.wordlist.addAll (FileUtils.readLines(new File(Start.reviewFolder,   tobereviewd), "UTF-8"));
+				}
+			}
+			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			logger.error("Failed to load work list:", e1);
