@@ -328,12 +328,9 @@ public class SpellingTestWindow extends JFrame {
 									LinkedList<String> toBeReviewed=Start.DReviewProgress.getToBeReviewed();
 									
 									
-									if (toBeReviewed.size()<Start.dailyReviewBackDays)
-									{
-										toBeReviewed.add(TestReview.getName());
-									}
+									toBeReviewed.add(TestReview.getName());
 									
-									if (toBeReviewed.size()>Start.dailyReviewBackDays)
+									while(toBeReviewed.size()>Start.dailyReviewBackDays)
 									{
 										toBeReviewed.removeFirst();
 									}

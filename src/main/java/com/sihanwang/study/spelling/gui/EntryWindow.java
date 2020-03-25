@@ -24,6 +24,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import com.sihanwang.study.spelling.*;
 import javax.swing.GroupLayout;
@@ -66,13 +69,17 @@ public class EntryWindow extends JFrame {
 			
 			if (Start.DReviewProgress!=null)
 			{
-				ArrayList<String> toBeReviewed=Start.DReviewProgress.getToBeReviewed();
+				LinkedList<String> toBeReviewed=Start.DReviewProgress.getToBeReviewed();
 				
 				for (String tobereviewd : toBeReviewed)
 				{
 					Start.wordlist.addAll (FileUtils.readLines(new File(Start.reviewFolder,   tobereviewd), "UTF-8"));
 				}
+				//dedup list 
+				Start.wordlist=getSingle(Start.wordlist);
 			}
+			
+			
 			
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -137,5 +144,18 @@ public class EntryWindow extends JFrame {
 				System.exit(0);
 			}}
 		);
+	}
+	
+	//dedup list
+	public static ArrayList<String> getSingle(List<String> list){
+	    ArrayList<String> newList = new ArrayList<String>(); 
+	    Iterator<String> it = list.iterator(); 
+	    while(it.hasNext()){
+	       String obj = it.next();
+	        if(!newList.contains(obj)){ 
+	        		newList.add(obj); 
+	        }
+	     }
+	     return newList;
 	}
 }

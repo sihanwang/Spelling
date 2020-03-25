@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 
@@ -205,7 +206,7 @@ public class Start {
 						}
 						else
 						{
-							DReviewProgress = new DailyReviewProgress(0,new ArrayList<String>());
+							DReviewProgress = new DailyReviewProgress(0,new LinkedList<String>());
 						}
 						
 						int dailyIndex=DReviewProgress.getDailyIndex();
