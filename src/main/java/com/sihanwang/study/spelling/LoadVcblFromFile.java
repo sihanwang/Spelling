@@ -45,9 +45,7 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-	;
-		
-		File file = new File("/Users/jing.wang/Desktop/word/WWW4A_DAY15.txt");
+		File file = new File("/Users/jing.wang/Desktop/word/grade3down/module10.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");
