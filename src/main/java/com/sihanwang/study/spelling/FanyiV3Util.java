@@ -128,7 +128,7 @@ public class FanyiV3Util {
 	/**
 	 * 生成加密字段
 	 */
-	public static String getDigest(String string) {
+	private String getDigest(String string) {
 		if (string == null) {
 			return null;
 		}
@@ -153,12 +153,11 @@ public class FanyiV3Util {
 
 	
 
-	public static String truncate(String q) {
+	private String truncate(String q) {
 		if (q == null) {
 			return null;
 		}
 		int len = q.length();
-		String result;
 		return len <= 20 ? q : (q.substring(0, 10) + len + q.substring(len - 10, len));
 	}
 }
