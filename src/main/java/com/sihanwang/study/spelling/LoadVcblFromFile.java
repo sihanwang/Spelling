@@ -18,6 +18,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+
 
 public class LoadVcblFromFile {
 
@@ -28,8 +32,15 @@ public class LoadVcblFromFile {
 	private static Logger logger = LoggerFactory.getLogger(LoadVcblFromFile.class);
 
 	private static String vocabulary_path;
+	
+	private static AnnotationConfigApplicationContext ctx;
 
 	static {
+		
+		ctx = new AnnotationConfigApplicationContext();
+        ctx.register(LoadConfig.class);
+        ctx.refresh();
+		
 		Properties prop = new Properties();
 		PropertyConfigurator.configure(log4jcfg);
 
@@ -45,7 +56,7 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-		File file = new File("/Users/jing.wang/Desktop/word/grade3down/module10.txt");
+		File file = new File("/Users/jing.wang/Desktop/word/grade3down/module11.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");
@@ -86,7 +97,7 @@ public class LoadVcblFromFile {
 
 		if (!explain_txt.exists() || !mp3_file.exists()) {
 
-			FanyiV3Util fv3U = new FanyiV3Util();
+			FanyiV3Util fv3U = (FanyiV3Util)ctx.getBean("YoudaoUtil");
 
 			YoudaoDictResponse YDDR = fv3U.requestForHttp(fv3U.createParams(word));
 
