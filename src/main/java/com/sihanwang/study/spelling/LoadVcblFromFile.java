@@ -60,6 +60,7 @@ public class LoadVcblFromFile {
 		
 		DownloadWordList(file);
 		logger.info("Done");
+		ctx.close();
 		System.exit(0);
 	}
 

@@ -237,6 +237,7 @@ public class Start {
 					}
 					else
 					{
+						Start.wordlist_name = file.getName();
 						EW = new EntryWindow(file);
 						setFullScreen(EW);
 					}
