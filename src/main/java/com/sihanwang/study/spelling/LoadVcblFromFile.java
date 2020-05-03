@@ -56,7 +56,7 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-		File file = new File("/Users/jing.wang/Desktop/word/grade3down/module11.txt");
+		File file = new File("/Users/jing.wang/github/Spelling/vocabulary/new/hou4up_u2_l3");
 		
 		DownloadWordList(file);
 		logger.info("Done");
@@ -66,7 +66,7 @@ public class LoadVcblFromFile {
 
 	public static void DownloadWordList(File fileWordList) throws Exception {
 		
-		String filename = fileWordList.getName().substring(0, fileWordList.getName().indexOf("."));
+		String filename = fileWordList.getName();
 		String manifest_file = vocabulary_path + Start.file_separator + filename;
 		String explain_path = vocabulary_path + Start.file_separator + "explain";
 		String mp3_path = vocabulary_path + Start.file_separator + "mp3";
