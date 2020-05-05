@@ -19,7 +19,7 @@ public class Daily50 {
 	private static final String log4jcfg = "../cfg/log4j.properties";
 
 	final static int WORD_NUM = 50;
-	static String inputPath = "/Users/jing.wang/Desktop/word/grade3down";
+	static String inputPath = "/Users/jing.wang/github/Spelling/daily50/backlog";
 	//static String inputPath = "/Users/jing.wang/temp/reviewinput";
 	static String vocabularyPath = "/Users/jing.wang/github/Spelling/daily50";
 	//static String vocabularyPath = "/Users/jing.wang/temp/review";

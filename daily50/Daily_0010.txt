@@ -42,4 +42,9 @@ crate
 rude
 brother
 laugh
-enjoy
+enjoycatch
+cruel
+habit
+armchair
+fridge
+shower
