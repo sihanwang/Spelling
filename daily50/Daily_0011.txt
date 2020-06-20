@@ -3,7 +3,7 @@ sofa
 toy
 catch
 safe
-sily
+silly
 false
 come from
 comfortable
@@ -13,3 +13,36 @@ washing machine
 vacuum cleaner
 bathroom
 view
+bored
+speed
+pull
+shout
+yawn
+interested
+relaxed
+tired
+nowadays
+starve
+rumor
+van
+tin
+chicken
+fish
+soup
+chopstick
+bowl
+add
+piece
+packet
+affirmative
+shopkeeper
+asleep
+web page
+powder
+email address
+suger
+spoon
+onion
+ingredient
+crunch
+roast
