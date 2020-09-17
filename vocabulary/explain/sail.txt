@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /seɪl/	US phonetic: /seɪl/
+
+#Translation#
+vi. 航行；启航，开船
+n. 帆，篷；航行
+vt. 航行

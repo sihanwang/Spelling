@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /træm/	US phonetic: /træm/
+
+#Translation#
+n. 电车轨道；煤车
+vt. 用煤车运载
+vi. 乘电车

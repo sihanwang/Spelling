@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /ˈprəʊɡræm/	US phonetic: /ˈproʊɡræm/
+
+#Translation#
+n. 程序；计划；大纲
+vt. 用程序指令；为…制订计划；为…安排节目
+vi. 编程序；安排节目；设计电脑程式

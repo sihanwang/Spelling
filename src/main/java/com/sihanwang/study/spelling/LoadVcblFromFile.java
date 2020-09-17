@@ -56,7 +56,7 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-		File file = new File("/Users/jing.wang/github/Spelling/vocabulary/new/hou4up_u6_l3");
+		File file = new File("/Users/jing.wang/github/Spelling/vocabulary/new/h4du12l3.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");
@@ -115,6 +115,17 @@ public class LoadVcblFromFile {
 
 			String translation_result = "";
 
+			if (basicResponse == null)
+			{
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+				System.out.println("Can not find:"+word);
+			}
+			
 			String Ukphonetic = basicResponse.getUkphonetic();
 
 			if (Ukphonetic != null && Ukphonetic != null) {
