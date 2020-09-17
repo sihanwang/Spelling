@@ -1,22 +1,3 @@
-scared
-elbow
-necklace
-body
-tattoo
-death
-ill
-skin
-pain
-cough
-education
-time off
-boarding school
-library
-mark
-magazine
-physics
-evil
-proof
 digital
 sweatshirt
 article
@@ -42,9 +23,3 @@ sunday
 January
 February
 March
-April
-May
-June
-July
-August
-September

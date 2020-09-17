@@ -40,7 +40,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sihanwang.study.spelling.Start;
-import com.sihanwang.study.spelling.Daily50;
+import com.sihanwang.study.spelling.Daily25;
 import com.sihanwang.study.spelling.DailyReviewProgress;
 import com.sihanwang.study.spelling.SpellingProgress;
 
@@ -318,7 +318,7 @@ public class SpellingTestWindow extends JFrame {
 									
 									int dailyIndex=1;
 									
-									List<File> allSourceFile = Daily50.searchFiles(new File(Start.dailyReviewListFolder, Start.dailyReviewListFolder));
+									List<File> allSourceFile = Daily25.searchFiles(new File(Start.dailyReviewListFolder, Start.dailyReviewListFolder));
 									
 									if(Start.DReviewProgress.getDailyIndex() <allSourceFile.size())
 									{

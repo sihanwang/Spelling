@@ -1,24 +1,3 @@
-deep
-take up
-bottom
-slide
-hill
-advert
-stomach
-freeze
-throat
-finger
-shoulder
-shake
-thief
-search
-sore
-toothache
-headache
-valuable
-ordinary
-kid
-ring
 treasure
 jewelry
 invitation
@@ -44,7 +23,3 @@ ancient
 temperature
 advice
 screen
-sunburn
-knee
-ankle
-free

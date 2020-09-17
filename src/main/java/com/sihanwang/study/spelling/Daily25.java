@@ -14,14 +14,14 @@ import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Daily50 {
+public class Daily25 {
 	
 	private static final String log4jcfg = "../cfg/log4j.properties";
 
-	final static int WORD_NUM = 50;
-	static String inputPath = "/Users/jing.wang/github/Spelling/daily50/backlog";
+	final static int WORD_NUM = 25;
+	static String inputPath = "/Users/jing.wang/github/Spelling/daily25/backlog";
 	//static String inputPath = "/Users/jing.wang/temp/reviewinput";
-	static String vocabularyPath = "/Users/jing.wang/github/Spelling/daily50";
+	static String vocabularyPath = "/Users/jing.wang/github/Spelling/daily25";
 	//static String vocabularyPath = "/Users/jing.wang/temp/review";
 	static String lineSeparator = System.getProperty("line.separator");
 	static HashSet<String> VocabularyLib = new HashSet<String>();
