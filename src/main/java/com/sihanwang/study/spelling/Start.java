@@ -206,7 +206,7 @@ public class Start {
 						}
 						else
 						{
-							DReviewProgress = new DailyReviewProgress(0,new LinkedList<String>());
+							DReviewProgress = new DailyReviewProgress(1,new LinkedList<String>());
 						}
 						
 						int dailyIndex=DReviewProgress.getDailyIndex();
