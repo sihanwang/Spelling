@@ -1,7 +1,0 @@
-rescue
-pet
-furry
-cuddly
-basket
-hutch
-trick
