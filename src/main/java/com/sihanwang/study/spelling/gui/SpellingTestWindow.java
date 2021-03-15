@@ -427,7 +427,7 @@ public class SpellingTestWindow extends JFrame {
 								InputField.setForeground(Color.black);
 								InputField.setText("");
 							}
-						}, 3000);
+						}, 10000);
 
 						
 					}
