@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /ˈvɪdiəʊ/	US phonetic: /ˈvɪdioʊ/
+
+#Translation#
+n. [电子] 视频；录像，录像机；电视
+adj. 视频的；录像的；电视的
+v. 录制

@@ -1,0 +1,6 @@
+#Pronunciation#
+UK phonetic: /test/	US phonetic: /test/
+
+#Translation#
+n. 测验，考查；测试；检验；化验
+v. 测验；化验，检查；试验，测试；考验

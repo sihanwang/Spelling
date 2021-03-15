@@ -1,0 +1,5 @@
+#Pronunciation#
+UK phonetic: /ˈmeθəd/	US phonetic: /ˈmeθəd/
+
+#Translation#
+n. 方法；条理；类函数

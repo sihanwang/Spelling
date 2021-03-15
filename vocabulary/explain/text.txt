@@ -1,0 +1,6 @@
+#Pronunciation#
+UK phonetic: /tekst/	US phonetic: /tekst/
+
+#Translation#
+n. [计] 文本；课文；主题
+vt. 发短信

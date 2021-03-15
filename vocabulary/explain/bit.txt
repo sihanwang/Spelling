@@ -1,0 +1,9 @@
+#Pronunciation#
+UK phonetic: /bɪt/	US phonetic: /bɪt/
+
+#Translation#
+n. [计] 比特（二进位制信息单位）；少量；马嚼子；辅币；老一套；一点，一块
+vt. 控制
+adj. 很小的；微不足道的
+adv. 有点儿；相当
+vt. 咬（e的过去式和过去分词）

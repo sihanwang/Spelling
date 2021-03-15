@@ -1,0 +1,6 @@
+#Pronunciation#
+UK phonetic: /ˈsentəns/	US phonetic: /ˈsentəns/
+
+#Translation#
+n. [语][计] 句子，命题；宣判，判决
+vt. 判决，宣判
