@@ -14,7 +14,7 @@ photographer
 mechanic
 cleaner
 nurse
-part-time
+part time
 exactly
 college
 vet
