@@ -18,7 +18,7 @@ public class Daily25 {
 	
 	private static final String log4jcfg = "../cfg/log4j.properties";
 
-	final static int WORD_NUM = 25;
+	final static int WORD_NUM = 15;
 	static String inputPath = "/Users/jing.wang/github/Spelling/daily25/backlog";
 	//static String inputPath = "/Users/jing.wang/temp/reviewinput";
 	static String vocabularyPath = "/Users/jing.wang/github/Spelling/daily25";
