@@ -1,0 +1,15 @@
+hurricane
+drought
+tornado
+heat wave
+flood
+forecast
+float
+frequently
+force
+loss
+blame
+occur
+temperature
+lightning
+global

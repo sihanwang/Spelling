@@ -230,7 +230,7 @@ public class SpellingTestWindow extends JFrame {
 
 				int code = e.getKeyChar();
 				
-				if (!((code > 64 && code < 91) || (code > 96 && code < 123) || (code == 32) || (code == 8))) {
+				if (!((code > 64 && code < 91) || (code > 96 && code < 123) || (code == 32) || (code == 8) || (code == 45) || (code == 39))) {
 					e.consume();
 				}
 
@@ -427,7 +427,7 @@ public class SpellingTestWindow extends JFrame {
 								InputField.setForeground(Color.black);
 								InputField.setText("");
 							}
-						}, 10000);
+						}, 7000);
 
 						
 					}
