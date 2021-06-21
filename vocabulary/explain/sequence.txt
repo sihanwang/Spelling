@@ -1,0 +1,6 @@
+#Pronunciation#
+UK phonetic: /ˈsiːkwəns/	US phonetic: /ˈsiːkwəns/
+
+#Translation#
+n. [数][计] 序列；顺序；续发事件
+vt. 按顺序排好
