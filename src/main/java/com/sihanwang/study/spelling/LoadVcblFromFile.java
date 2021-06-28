@@ -56,7 +56,7 @@ public class LoadVcblFromFile {
 	public static void main(String[] args) throws Exception {
 		// DownloadWordList(args[0]);
 		
-		File file = new File("/Users/jing.wang/github/Spelling/vocabulary/new/grade4.txt");
+		File file = new File("/Users/jing.wang/github/Spelling/vocabulary/new/houzhongyubei_unit12B.txt");
 		
 		DownloadWordList(file);
 		logger.info("Done");
