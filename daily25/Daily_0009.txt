@@ -1,15 +1,18 @@
-machine
-cable car
-technology
-conclusion
-afford
-soap opera
-commercial
-broadcast
-reality show
-reason
-fault
-clever
-nurse
-carry
-prison
+weekend
+weekly
+monday
+tuesday
+wednesday
+thursday
+friday
+saturday
+sunday
+January
+February
+March
+interested
+relaxed
+tired
+nowadays
+starve
+rumor

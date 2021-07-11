@@ -1,15 +1,18 @@
-college
-suggest
-customer
-mechanic
-qualification
-photographer
-remote control
-throw away
-program
-grab
-product
-disappear
-obvious
-discuss
-climate
+van
+tin
+chicken
+fish
+soup
+chopstick
+bowl
+add
+piece
+packet
+affirmative
+shopkeeper
+asleep
+web page
+powder
+email address
+spoon
+onion
