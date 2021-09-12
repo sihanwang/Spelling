@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /blɒɡ/	US phonetic: /blɑːɡ/
+
+#Translation#
+n. 博客；部落格；网络日志
+vi. 写博客
+vt. 写……博客

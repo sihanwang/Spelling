@@ -1,0 +1,7 @@
+#Pronunciation#
+UK phonetic: /ˈɪndeks/	US phonetic: /ˈɪndeks/
+
+#Translation#
+n. 指标；指数；索引；指针
+vi. 做索引
+vt. 指出；编入索引中
