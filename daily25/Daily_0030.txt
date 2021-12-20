@@ -1,18 +1,18 @@
-land
-farmer
-ride
-bottle
-bus
-plane
-ship
-port
-airport
-stop
-platform
-station
-holiday
-centre
-travel
-visit
-relax
-lucky
+infection
+harmless
+cure
+lack of
+remedy
+restore
+balance
+within
+well-being
+depend on
+make up
+multiply
+viral
+hot spring
+sir
+potato
+dangerous
+put

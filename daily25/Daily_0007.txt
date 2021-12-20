@@ -1,18 +1,18 @@
-floor
-balcony
-grow up
-roof
-hospital
-sitting room
-collect
-stalker
-stomach
-predator
-characteristic
-fossil
-imaginary
-function
-means
-rise
-chance
-jaw
+bacteria
+microscope
+strain
+expert
+illness
+germ
+perhaps
+list
+deadly
+prevent
+spread
+dolphin
+intelligent
+seem
+human
+brain
+scientist
+communication

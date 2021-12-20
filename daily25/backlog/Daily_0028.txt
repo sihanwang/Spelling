@@ -1,3 +1,8 @@
+term
+trainer
+guess
+geography
+same
 saw
 trip
 took
@@ -11,15 +16,3 @@ bought
 wore
 go on a trip
 ice
-at first
-fell
-fall over
-a lot of
-be able to
-skate
-become
-gold
-long ago
-magic
-paintbrush
-woman

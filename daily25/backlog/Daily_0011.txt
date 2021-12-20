@@ -1,25 +1,18 @@
-enjoy
-cruel
-habit
-armchair
-fridge
-shower
-sink
-sofa
-toy
-catch
-safe
-false
-come from
-comfortable
-bookcase
-modern
-washing machine
-vacuum cleaner
-bathroom
-view
-bored
-speed
-pull
-shout
-yawn
+ingredient
+elephant
+goldfish
+kitten
+parrot
+puppy
+rabbit
+count
+word
+first
+person
+around
+find
+language
+month
+lizard
+meter
+concert

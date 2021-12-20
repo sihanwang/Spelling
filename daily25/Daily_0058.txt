@@ -1,18 +1,18 @@
-adventure
-rock
-rainy
-sunny
-cloudy
-PE
-Chinese
-art
-computer
-shall
-arm
-nice
-always
-a bit
-shy
-card
-quiet
-another
+bat
+sand
+desert
+pyramid
+telescope
+space
+astronomer
+galaxy
+planet
+entire
+tool
+circle
+search for
+powerful
+allow
+identify
+solar
+concept

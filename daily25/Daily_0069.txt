@@ -1,18 +1,18 @@
-scene
-fingerprint
-pattern
-break
-clue
-vehicle
-tire
-space
-compare
-possible
-direction
-Renaissance
-project
-cathedral
-material
-complete
-concrete
-rely
+prison
+photographer
+mechanic
+cleaner
+nurse
+part time
+exactly
+college
+vet
+clever
+hard
+champion
+fight
+excited
+match
+give up
+gymnast
+boxer

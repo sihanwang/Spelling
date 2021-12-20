@@ -1,0 +1,18 @@
+distance
+remove
+touch
+off duty
+contact
+career
+employee
+manager
+staff
+anger
+boredom
+happiness
+relationship
+similar
+humor
+get along
+disappointed
+behavior

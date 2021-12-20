@@ -1,25 +1,18 @@
-river
-hear
-footstep
-stairs
-family
-ghost
-knight
-stupid
-trick
-flat
-house
-castle
-houseboat
-cottage
-tower
-hut
-igloo
-cool
-job
-sleep
-check
-medicine
-kill
-grass
-area
+come from
+comfortable
+bookcase
+modern
+washing machine
+vacuum cleaner
+bathroom
+view
+speed
+pull
+yawn
+autograph
+act
+interview
+audience
+stage
+world
+elbow
